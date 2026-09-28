@@ -16,13 +16,12 @@ let heartbeatTimer = null;
 
 const latestMarkets = {};
 
-export const connectToMarketData = (wss) => {
+export const connectToMarketData = (io) => {
   if (!TWELVE_DATA_API_KEY) {
     throw new Error("TWELVE_DATA_API_KEY is not defined");
   }
 
   const connect = () => {
-    // Prevent duplicate connections
     if (
       marketSocket &&
       (
@@ -40,8 +39,6 @@ export const connectToMarketData = (wss) => {
 
     marketSocket.on("open", () => {
       console.log("Connected to Twelve Data");
-
-      // Subscribe again after every reconnect
       marketSocket.send(
         JSON.stringify({
           action: "subscribe",
@@ -52,8 +49,6 @@ export const connectToMarketData = (wss) => {
       );
 
       console.log(`Subscribed to: ${symbols.join(", ")}`);
-
-      // Heartbeat
       if (heartbeatTimer) {
         clearInterval(heartbeatTimer);
       }
@@ -74,8 +69,6 @@ export const connectToMarketData = (wss) => {
     marketSocket.on("message", (data) => {
       try {
         const message = JSON.parse(data.toString());
-
-        // Subscription response
         if (message.event === "subscribe-status") {
           console.log(
             "Subscription status:",
@@ -85,7 +78,6 @@ export const connectToMarketData = (wss) => {
           return;
         }
 
-        // Heartbeat response
         if (message.event === "heartbeat") {
           console.log("Heartbeat response received");
           return;
@@ -103,18 +95,8 @@ export const connectToMarketData = (wss) => {
           latestMarkets[message.symbol] = market;
 
           console.log("Market update:", market);
-
-          // Send update to every connected frontend
-          wss.clients.forEach((client) => {
-            if (client.readyState === WebSocket.OPEN) {
-              client.send(
-                JSON.stringify({
-                  type: "market_update",
-                  data: market,
-                })
-              );
-            }
-          });
+          
+         io.emit("market_update", market);
         }
       } catch (error) {
         console.error(
@@ -136,7 +118,7 @@ export const connectToMarketData = (wss) => {
         `Twelve Data disconnected. Code: ${code}, Reason: ${reason.toString()}`
       );
 
-      // Stop heartbeat
+
       if (heartbeatTimer) {
         clearInterval(heartbeatTimer);
         heartbeatTimer = null;

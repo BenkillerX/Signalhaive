@@ -5,7 +5,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { useState } from "react";
-
+import signalHiveLogo from '/images/SignalHive.jpeg'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,11 +26,21 @@ const Navbar = () => {
       <nav>
         {/* MOBILE NAVBAR */}
         <div className="px-4 py-3 flex items-center justify-between md:hidden">
-          <Link to="/" onClick={closeMenu}>
-            <h1 className="text-xl font-bold text-slate-900">
-              Signal<span className="text-slate-600">Hive</span>
-            </h1>
-          </Link>
+          <Link
+        to="/"
+        onClick={closeMenu}
+        className="flex items-center gap-2"
+      >
+        <img
+          src={signalHiveLogo}
+          alt=""
+          className="h-7 w-7 object-contain"
+        />
+
+        <h1 className="text-xl font-bold text-slate-900">
+          Signal<span className="text-slate-600">Hive</span>
+        </h1>
+      </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -49,11 +59,21 @@ const Navbar = () => {
         >
           {/* Sidebar Header */}
           <div className="flex items-center justify-between border-b border-gray-100 px-5 py-5">
-            <Link to="/" onClick={closeMenu}>
-              <h2 className="text-xl font-bold tracking-tight text-slate-900">
-                Signal<span className="text-slate-600">Hive</span>
-              </h2>
-            </Link>
+           <Link
+          to="/"
+          onClick={closeMenu}
+          className="flex items-center gap-2"
+        >
+          <img
+            src={signalHiveLogo}
+            alt=""
+            className="h-7 w-7 object-contain"
+          />
+
+          <h2 className="text-xl font-bold tracking-tight text-slate-900">
+            Signal<span className="text-slate-600">Hive</span>
+          </h2>
+        </Link>
 
             <button
               onClick={closeMenu}
@@ -120,12 +140,20 @@ const Navbar = () => {
         {/* DESKTOP / TABLET NAVBAR */}
         <div className="hidden md:flex bg-slate-600 text-white items-center px-8 lg:px-28 py-2 justify-between w-full">
           {/* Logo */}
-          <Link to="/">
-            <h1 className="text-xl font-bold">
-              SignalHive
-            </h1>
-          </Link>
+         <Link
+  to="/"
+  className="flex items-center gap-2"
+      >
+        <img
+          src={signalHiveLogo}
+          alt=""
+          className="h-7 w-7 object-contain"
+        />
 
+        <h1 className="text-xl font-bold">
+          SignalHive
+        </h1>
+      </Link>
           {/* Navigation */}
           <ul className="flex gap-6 lg:gap-8">
             {navLinks.map((link) => (

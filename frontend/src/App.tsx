@@ -15,6 +15,7 @@ import AdminLayouts from "./layouts/AdminLayouts"
 import AdminDashboard from "./pages/admin/AdminDashboard"
 import AddSignal from "./pages/admin/AddSignal"
 import { Toaster } from "react-hot-toast";
+import Market from "./pages/user/Market"
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
 
         {/* User Routes */}
         <Route element={<UsersLayout />}>
-          <Route path="/markets" element={<UserComingSoon />} />
+          <Route path="/markets" element={<Market />} />
           <Route path="/live-signals" element={<LiveSignals />} />
           <Route path="/portfolio" element={<UserComingSoon />} />
           <Route path="/wallet" element={<UserComingSoon />} />

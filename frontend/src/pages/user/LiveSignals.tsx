@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { socket } from "../../services/socket";
 
 type Signal = {
   _id: string;
@@ -45,55 +46,28 @@ const LiveSignals = () => {
 const [markets, setMarkets] = useState(initialMarkets)
 const [signals, setSignals] = useState<Signal[]>([]);
 useEffect(() => {
-  const socket = new WebSocket(
-    `${import.meta.env.VITE_WS_URL}/ws/markets`
-  );
+  socket.connect();
 
-  socket.onopen = () => {};
+  function onMarketUpdate(data: {
+    symbol: string;
+    price: number;
+  }) {
+    setMarkets((currentMarkets) =>
+      currentMarkets.map((market) =>
+        market.symbol === data.symbol
+          ? {
+              ...market,
+              price: data.price,
+            }
+          : market
+      )
+    );
+  }
 
-  socket.onmessage = (event) => {
-    const message = JSON.parse(event.data);
-
-    if (message.type === "market_snapshot") {
-      setMarkets((currentMarkets) =>
-        currentMarkets.map((market) => {
-          const liveMarket = message.data.find(
-            (item: { symbol: string; price: number }) =>
-              item.symbol === market.symbol
-          );
-
-          return liveMarket
-            ? {
-                ...market,
-                price: liveMarket.price,
-              }
-            : market;
-        })
-      );
-    }
-
-    if (message.type === "market_update") {
-      const updatedMarket = message.data;
-
-      setMarkets((currentMarkets) =>
-        currentMarkets.map((market) =>
-          market.symbol === updatedMarket.symbol
-            ? {
-                ...market,
-                price: updatedMarket.price,
-              }
-            : market
-        )
-      );
-    }
-  };
-
-  socket.onerror = () => {};
-
-  socket.onclose = () => {};
+  socket.on("market_update", onMarketUpdate);
 
   return () => {
-    socket.close();
+    socket.off("market_update", onMarketUpdate);
   };
 }, []);
 

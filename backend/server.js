@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import { connectDB } from "./src/config/db.js";
-import http from "http";
-import { WebSocketServer } from "ws";
+import {createServer}  from 'http'
+import { Server } from "socket.io";
 import cors from "cors";
 
 import authRoutes from "./src/modules/auth/auth.routes.js";
@@ -29,37 +29,20 @@ app.get("/", (req, res) => {
     message: "SignalHive API is running",
   });
 });
+const server = createServer(app);
 
-// Create HTTP server
-const server = http.createServer(app);
-
-// Create WebSocket server
-const wss = new WebSocketServer({
-  server,
-  path: "/ws/markets",
+const io = new Server(server, {
+  cors: {
+    origin: [
+      "http://localhost:5173",
+      "https://signalhive-sooty.vercel.app",
+    ],
+  },
 });
-
-// Frontend WebSocket connection
-wss.on("connection", (socket) => {
-  console.log("Frontend connected to market WebSocket");
-
-  // Send current market data immediately
-  socket.send(
-    JSON.stringify({
-      type: "market_snapshot",
-      data: getLatestMarkets(),
-    })
-  );
-
-  socket.on("close", () => {
-    console.log("Frontend disconnected from market WebSocket");
-  });
-
-  socket.on("error", (error) => {
-    console.error("Frontend WebSocket error:", error);
-  });
-});
-
+io.on('connection', (socket)=>{
+      console.log('user connected successfully');
+})
+connectToMarketData(io);
 const startServer = async () => {
   try {
     await connectDB();
@@ -68,8 +51,6 @@ const startServer = async () => {
 
     server.listen(PORT, () => {
       console.log(`Server running on ${PORT}`);
-
-      connectToMarketData(wss);
     });
   } catch (error) {
     console.error(
