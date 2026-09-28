@@ -7,10 +7,11 @@ import {
   Settings,
   CircleHelp,
   LogOut,
+  GraduationCap,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
+import signalHiveLogo from "/images/plainLogo2.jpeg";
 const UserSidebar = () => {
   const navigate = useNavigate();
   const { currentUser, logout } = useAuth();
@@ -36,6 +37,11 @@ const UserSidebar = () => {
     icon: History,
     path: "/trade-history",
   },
+{
+  label: "Mentorship",
+  icon: GraduationCap,
+  path: "/mentorship",
+},
   {
       label: "Notifications",
       icon: Bell,
@@ -70,9 +76,20 @@ const UserSidebar = () => {
   return (
     <aside className="fixed left-0 top-0 z-40 hidden h-screen w-64 border-r border-slate-200 bg-white lg:flex lg:flex-col">
       {/* Logo */}
-      <div className="flex h-20 items-center border-b border-slate-200 px-6">
-        <h1 className="text-xl font-bold text-slate-900">SignalHive</h1>
-      </div>
+     {/* Logo */}
+<div className="flex h-20 items-center border-b border-slate-200 px-6">
+  <div className="flex items-center gap-3">
+    <img
+      src={signalHiveLogo}
+      alt="SignalHive"
+      className="h-9 w-9 object-contain"
+    />
+
+    <h1 className="text-xl font-bold text-slate-900">
+      SignalHive
+    </h1>
+  </div>
+</div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-4 py-6">

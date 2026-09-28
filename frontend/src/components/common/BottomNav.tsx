@@ -11,10 +11,11 @@ import {
   X,
   Menu,
   User,
+  GraduationCap,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
+import signalHiveLogo from "/images/plainLogo2.jpeg";
 const BottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,33 +47,38 @@ const BottomNav = () => {
     },
   ];
 
-  const moreNavigation = [
-    {
-      label: "Trade History",
-      icon: History,
-      path: "/trade-history",
-    },
-    {
-      label: "Notifications",
-      icon: Bell,
-      path: "/coming-soon",
-    },
-    {
-      label: "Settings",
-      icon: Settings,
-      path: "/coming-soon",
-    },
-    {
-      label: "Help & Support",
-      icon: CircleHelp,
-      path: "/coming-soon",
-    },
-    {
-      label: "Profile",
-      icon: User,
-      path: "/profile",
-    },
-  ];
+const moreNavigation = [
+  {
+    label: "Trade History",
+    icon: History,
+    path: "/trade-history",
+  },
+  {
+    label: "Mentorship",
+    icon: GraduationCap,
+    path: "/mentorship",
+  },
+  {
+    label: "Notifications",
+    icon: Bell,
+    path: "/coming-soon",
+  },
+  {
+    label: "Settings",
+    icon: Settings,
+    path: "/coming-soon",
+  },
+  {
+    label: "Help & Support",
+    icon: CircleHelp,
+    path: "/coming-soon",
+  },
+  {
+    label: "Profile",
+    icon: User,
+    path: "/profile",
+  },
+];
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -118,26 +124,34 @@ const BottomNav = () => {
           {/* Bottom Sheet */}
           <div className="absolute bottom-0 left-0 w-full rounded-t-3xl bg-white p-5 shadow-2xl">
             {/* Header */}
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-semibold text-slate-900">
-                  More
-                </h2>
+           {/* Header */}
+<div className="mb-5 flex items-center justify-between">
+  <div className="flex items-center gap-3">
+    <img
+      src={signalHiveLogo}
+      alt="SignalHive"
+      className="h-9 w-9 object-contain"
+    />
 
-                <p className="text-sm text-slate-500">
-                  Account and additional options
-                </p>
-              </div>
+    <div>
+      <h2 className="text-lg font-semibold text-slate-900">
+        SignalHive
+      </h2>
 
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
-                aria-label="Close menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
+      <p className="text-sm text-slate-500">
+        Account and additional options
+      </p>
+    </div>
+  </div>
 
+  <button
+    onClick={() => setIsMenuOpen(false)}
+    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
+    aria-label="Close menu"
+  >
+    <X size={20} />
+  </button>
+</div>
             {/* =========================
                 CURRENT USER
             ========================== */}

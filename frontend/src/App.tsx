@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard"
 import AddSignal from "./pages/admin/AddSignal"
 import { Toaster } from "react-hot-toast";
 import Market from "./pages/user/Market"
+import Mentorship from "./pages/user/Mentorship"
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/portfolio" element={<UserComingSoon />} />
           <Route path="/wallet" element={<UserComingSoon />} />
           <Route path="/trade-history" element={<UserComingSoon />} />
+          <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/notifications" element={<UserComingSoon />} />
           <Route path="/settings" element={<UserComingSoon />} />
           <Route path="/help-support" element={<UserComingSoon />} />
