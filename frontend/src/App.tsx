@@ -17,6 +17,8 @@ import AddSignal from "./pages/admin/AddSignal"
 import { Toaster } from "react-hot-toast";
 import Market from "./pages/user/Market"
 import Mentorship from "./pages/user/Mentorship"
+import ForgotPassword from "./pages/auth/ForgotPassword"
+import ResetPassword from "./pages/auth/ResetPassword"
 
 function App() {
   return (
@@ -58,7 +60,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route
+  path="/reset-password"
+  element={<ResetPassword />}
+/>
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
     </>

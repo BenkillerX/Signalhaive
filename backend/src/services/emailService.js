@@ -90,3 +90,99 @@ export const sendVerificationEmail = async (email, code) => {
 
   return response;
 };
+
+export const sendPasswordResetEmail = async (email, resetUrl) => {
+  const response =
+    await brevo.transactionalEmails.sendTransacEmail({
+      sender: {
+        name: "SignalHive",
+        email: process.env.BREVO_SENDER_EMAIL,
+      },
+
+      to: [
+        {
+          email,
+        },
+      ],
+
+      subject: "Reset your SignalHive password",
+
+      textContent: `We received a request to reset your SignalHive password.
+
+Click this link to reset your password:
+${resetUrl}
+
+This link expires in 10 minutes.
+
+If you did not request a password reset, you can safely ignore this email.`,
+
+      htmlContent: `
+        <div style="
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 40px 20px;
+          color: #1f2937;
+        ">
+
+          <h2 style="
+            color: #15803d;
+            margin-bottom: 24px;
+          ">
+            Reset your SignalHive password
+          </h2>
+
+          <p>
+            We received a request to reset your SignalHive password.
+          </p>
+
+          <p>
+            Click the button below to create a new password:
+          </p>
+
+          <div style="margin: 30px 0;">
+            <a
+              href="${resetUrl}"
+              style="
+                display: inline-block;
+                padding: 14px 24px;
+                background: #15803d;
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                font-weight: bold;
+              "
+            >
+              Reset Password
+            </a>
+          </div>
+
+          <p>
+            This link expires in <strong>10 minutes</strong>.
+          </p>
+
+          <p style="
+            margin-top: 30px;
+            color: #6b7280;
+            font-size: 14px;
+          ">
+            If you did not request a password reset,
+            you can safely ignore this email.
+          </p>
+
+          <p style="
+            margin-top: 30px;
+            color: #9ca3af;
+            font-size: 12px;
+          ">
+            © ${new Date().getFullYear()} SignalHive
+          </p>
+
+        </div>
+      `,
+    });
+
+  console.log("Password reset email sent:", response.messageId);
+
+  return response;
+};

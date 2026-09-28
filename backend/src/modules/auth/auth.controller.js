@@ -2,7 +2,9 @@ import User from "../../models/User.js";
 import bcrypt from "bcrypt";
 import {hashVerificationCode,generateVerificationCode,} from "../../utils/emailVerification.js";
 import { generateToken } from "../../utils/Token.js";
-import { sendVerificationEmail } from "../../services/emailService.js";
+import { sendVerificationEmail, sendPasswordResetEmail } from "../../services/emailService.js";
+import crypto from "crypto";
+import USER from "../../models/User.js";
 
 export async function register(req, res) {
     try {
@@ -129,6 +131,124 @@ export async function Login(req, res) {
     }
 }
 
+export async function forgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Email is required",
+      });
+    }
+
+    const user = await USER.findOne({
+      email: email.toLowerCase().trim(),
+    });
+
+    // Don't reveal whether an account exists
+    if (!user) {
+      return res.status(200).json({
+        message:
+          "If an account with that email exists, a password reset link has been sent.",
+      });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    const hashedResetToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    user.passwordResetToken = hashedResetToken;
+    user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+    await user.save();
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+
+    await sendPasswordResetEmail(
+  user.email,
+  resetUrl
+);
+
+    return res.status(200).json({
+      message:
+        "If an account with that email exists, a password reset link has been sent.",
+    });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+
+    return res.status(500).json({
+      message: "Something went wrong. Please try again later.",
+    });
+  }
+}
+export async function resetPassword(req, res) {
+    try {
+        const { token, password } = req.body;
+
+        // 1. Validate input
+        if (!token || !password) {
+            return res.status(400).json({
+                message: "Token and password are required",
+            });
+        }
+
+        // 2. Validate password length
+        if (password.length < 8) {
+            return res.status(400).json({
+                message: "Password must be at least 8 characters",
+            });
+        }
+
+        // 3. Hash the token
+        // The database contains the hashed version,
+        // while the URL contains the original token.
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+
+        // 4. Find the user with this token
+        const user = await USER.findOne({
+            passwordResetToken: hashedToken,
+            passwordResetExpires: {
+                $gt: new Date(),
+            },
+        });
+
+        // 5. Token doesn't exist or has expired
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid or expired password reset token",
+            });
+        }
+
+        // 6. Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        // 7. Update the password
+        user.password = hashedPassword;
+
+        // 8. Invalidate the reset token
+        user.passwordResetToken = null;
+        user.passwordResetExpires = null;
+
+        // 9. Save the user
+        await user.save();
+
+        return res.status(200).json({
+            message: "Password reset successfully",
+        });
+    } catch (error) {
+        console.error("Reset password error:", error);
+
+        return res.status(500).json({
+            message: "Something went wrong. Please try again later.",
+        });
+    }
+}
 export const emailValidation = async (req, res) => {
     try {
         const { email, code } = req.body;
