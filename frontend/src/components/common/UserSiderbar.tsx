@@ -2,7 +2,6 @@ import {
   ChartCandlestick,
   Signal,
   Wallet,
-  History,
   Bell,
   Settings,
   CircleHelp,
@@ -31,11 +30,6 @@ const UserSidebar = () => {
     label: "Wallet",
     icon: Wallet,
     path: "/wallet",
-  },
-  {
-    label: "Trade History",
-    icon: History,
-    path: "/trade-history",
   },
 {
   label: "Mentorship",
@@ -86,7 +80,7 @@ const UserSidebar = () => {
     />
 
     <h1 className="text-xl font-bold text-slate-900">
-      SignalHive
+      SignalHaive
     </h1>
   </div>
 </div>

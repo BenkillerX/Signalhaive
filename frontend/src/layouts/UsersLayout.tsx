@@ -9,12 +9,14 @@ const UsersLayout = () => {
       <UserSidebar />
 
       {/* Main Content */}
-      <main className="min-w-0 lg:ml-64">
+      <main className="min-w-0 pb-24 lg:ml-64 lg:pb-0">
         <Outlet />
       </main>
 
-      {/* Mobile Bottom Navigation */}
-      <BottomNav />
+      {/* Mobile + Tablet Bottom Navigation */}
+      <div className="lg:hidden">
+        <BottomNav />
+      </div>
     </div>
   );
 };

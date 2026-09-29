@@ -19,12 +19,18 @@ import Market from "./pages/user/Market"
 import Mentorship from "./pages/user/Mentorship"
 import ForgotPassword from "./pages/auth/ForgotPassword"
 import ResetPassword from "./pages/auth/ResetPassword"
+import Wallet from "./pages/user/Wallet"
+import Notifications from "./pages/user/Notifications"
+import Settings from "./pages/user/Settings"
+import HelpAndSupport from "./pages/user/HelpAndSupport"
+import ScrollToTop from "./ScrollToTop"
+import Users from "./pages/admin/Users"
 
 function App() {
   return (
     <>
       <Toaster position="top-right" />
-
+      <ScrollToTop/>
       <Routes>
         {/* Public Pages Routes */}
         <Route element={<PublicLayout />}>
@@ -39,19 +45,19 @@ function App() {
           <Route path="/markets" element={<Market />} />
           <Route path="/live-signals" element={<LiveSignals />} />
           <Route path="/portfolio" element={<UserComingSoon />} />
-          <Route path="/wallet" element={<UserComingSoon />} />
+          <Route path="/wallet" element={<Wallet />} />
           <Route path="/trade-history" element={<UserComingSoon />} />
           <Route path="/mentorship" element={<Mentorship />} />
-          <Route path="/notifications" element={<UserComingSoon />} />
-          <Route path="/settings" element={<UserComingSoon />} />
-          <Route path="/help-support" element={<UserComingSoon />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/help-support" element={<HelpAndSupport />} />
         </Route>
 
         {/* Admin Routes */}
         <Route element={<AdminLayouts />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/add-signal" element={<AddSignal />} />
-          <Route path="/admin-users" element={<UserComingSoon />} />
+          <Route path="/admin-users" element={<Users />} />
           <Route path="/admin-transactions" element={<UserComingSoon />} />
           <Route path="/admin-settings" element={<UserComingSoon />} />
         </Route>

@@ -3,14 +3,12 @@ import {
   ChartCandlestick,
   Signal,
   Wallet,
-  History,
   Bell,
   Settings,
   CircleHelp,
   LogOut,
   X,
   Menu,
-  User,
   GraduationCap,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -49,11 +47,6 @@ const BottomNav = () => {
 
 const moreNavigation = [
   {
-    label: "Trade History",
-    icon: History,
-    path: "/trade-history",
-  },
-  {
     label: "Mentorship",
     icon: GraduationCap,
     path: "/mentorship",
@@ -61,23 +54,18 @@ const moreNavigation = [
   {
     label: "Notifications",
     icon: Bell,
-    path: "/coming-soon",
+    path: "/notifications",
   },
   {
     label: "Settings",
     icon: Settings,
-    path: "/coming-soon",
+    path: "/settings",
   },
   {
     label: "Help & Support",
     icon: CircleHelp,
-    path: "/coming-soon",
-  },
-  {
-    label: "Profile",
-    icon: User,
-    path: "/profile",
-  },
+    path: "/help-support",
+  }
 ];
 
   const handleNavigation = (path: string) => {
@@ -113,7 +101,7 @@ const moreNavigation = [
           MOBILE MORE MENU
       ========================== */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-60 md:hidden">
+  <div className="fixed inset-0 z-60 lg:hidden">
           {/* Backdrop */}
           <button
             aria-label="Close menu"
@@ -235,7 +223,7 @@ const moreNavigation = [
       {/* =========================
           BOTTOM NAVIGATION
       ========================== */}
-      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
+      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
         <div className="flex h-16 items-center justify-around px-1">
           {mainNavigation.map((item) => {
             const Icon = item.icon;
