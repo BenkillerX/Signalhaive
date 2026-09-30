@@ -67,6 +67,7 @@ export async function register(req, res) {
     }
 }
 
+
 export async function Login(req, res) {
     try {
         const { password } = req.body;
@@ -94,6 +95,13 @@ export async function Login(req, res) {
         if (!passwordMatch) {
             return res.status(401).json({
                 message: "Invalid email or password.",
+            });
+        }
+
+        // Don't allow banned users to log in
+        if (user.isBanned) {
+            return res.status(403).json({
+                message: "You were banned from SignalHive.",
             });
         }
 
@@ -130,6 +138,7 @@ export async function Login(req, res) {
         });
     }
 }
+
 
 export async function forgotPassword(req, res) {
   try {

@@ -60,6 +60,52 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+
+        // =========================
+        // SUBSCRIPTION
+        // =========================
+
+        subscriptionPlan: {
+            type: String,
+            enum: ["none", "weekly", "monthly", "yearly"],
+            default: "none",
+        },
+
+        subscriptionStatus: {
+            type: String,
+            enum: ["inactive", "active", "expired", "cancelled"],
+            default: "inactive",
+        },
+
+        subscriptionStartDate: {
+            type: Date,
+            default: null,
+        },
+
+        subscriptionEndDate: {
+            type: Date,
+            default: null,
+        },
+
+        // =========================
+        // ACCOUNT STATUS
+        // =========================
+
+        isBanned: {
+            type: Boolean,
+            default: false,
+        },
+
+        bannedAt: {
+            type: Date,
+            default: null,
+        },
+
+        banReason: {
+            type: String,
+            default: null,
+            trim: true,
+        },
     },
     {
         timestamps: true,

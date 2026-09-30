@@ -51,7 +51,7 @@ const Wallet = () => {
                 </p>
 
                 <p className="mt-1 text-2xl font-bold text-slate-900">
-                  ₦15,000
+                  $30
                   <span className="text-sm font-normal text-slate-500">
                     {" "} / month
                   </span>
@@ -77,98 +77,117 @@ const Wallet = () => {
           <div className="grid gap-4 md:grid-cols-3">
 
             {/* Weekly */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-slate-500">
-                Weekly
-              </p>
+<div className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md">
 
-              <div className="mt-3">
-                <span className="text-3xl font-bold tracking-tight text-slate-900">
-                  ₦5,000
-                </span>
+  <div className="flex items-center justify-between">
+    <p className="text-sm font-semibold text-slate-500">
+      Weekly
+    </p>
 
-                <span className="text-sm text-slate-500">
-                  {" "} / week
-                </span>
-              </div>
+    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+      Flexible
+    </span>
+  </div>
 
-              <div className="my-6 border-t border-slate-100" />
+  <div className="mt-4">
+    <span className="text-4xl font-bold tracking-tight text-slate-900">
+      $8
+    </span>
 
-              <ul className="space-y-3 text-sm text-slate-600">
-                <li>✓ Access to live signals</li>
-                <li>✓ Real-time market updates</li>
-                <li>✓ Signal history</li>
-                <li>✓ Trade tracking</li>
-              </ul>
+    <span className="ml-1 text-sm text-slate-500">
+      / week
+    </span>
+  </div>
 
-              <button className="mt-6 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-                Choose Weekly
-              </button>
-            </div>
+  <p className="mt-2 text-xs text-slate-400">
+    Short-term access to SignalHive
+  </p>
 
-            {/* Monthly */}
-            <div className="relative rounded-2xl border border-emerald-200 bg-white p-5 shadow-sm">
-              <span className="absolute right-5 top-5 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-600">
-                Popular
-              </span>
+  <div className="my-6 border-t border-slate-100" />
 
-              <p className="text-sm font-semibold text-slate-500">
-                Monthly
-              </p>
+  <ul className="space-y-3 text-sm text-slate-600">
+    <li className="flex items-center gap-2">
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-xs text-slate-600">
+        ✓
+      </span>
+      Access to live signals
+    </li>
+  </ul>
 
-              <div className="mt-3">
-                <span className="text-3xl font-bold tracking-tight text-slate-900">
-                  ₦15,000
-                </span>
+  {/* mt-auto pushes this to the bottom */}
+  <button className="mt-auto pt-7">
+    <span className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
+      Choose Weekly
+    </span>
+  </button>
 
-                <span className="text-sm text-slate-500">
-                  {" "} / month
-                </span>
-              </div>
+</div>
+           {/* Monthly */}
+<div className="relative flex h-full flex-col rounded-2xl border border-emerald-200 bg-white p-5 shadow-sm">
+  <span className="absolute right-5 top-5 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-600">
+    Popular
+  </span>
 
-              <div className="my-6 border-t border-slate-100" />
+  <p className="text-sm font-semibold text-slate-500">
+    Monthly
+  </p>
 
-              <ul className="space-y-3 text-sm text-slate-600">
-                <li>✓ Access to live signals</li>
-                <li>✓ Real-time market updates</li>
-                <li>✓ Signal history</li>
-                <li>✓ Trade tracking</li>
-              </ul>
+  <div className="mt-3">
+    <span className="text-3xl font-bold tracking-tight text-slate-900">
+      $30
+    </span>
 
-              <button className="mt-6 w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-                Choose Monthly
-              </button>
-            </div>
+    <span className="text-sm text-slate-500">
+      {" "} / month
+    </span>
+  </div>
 
-            {/* Yearly */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-slate-500">
-                Yearly
-              </p>
+  <div className="my-6 border-t border-slate-100" />
 
-              <div className="mt-3">
-                <span className="text-3xl font-bold tracking-tight text-slate-900">
-                  ₦150,000
-                </span>
+  <ul className="space-y-3 text-sm text-slate-600">
+    <li>✓ Access to live signals</li>
+    <li>✓ Real-time market updates</li>
+  </ul>
 
-                <span className="text-sm text-slate-500">
-                  {" "} / year
-                </span>
-              </div>
+  <button className="mt-auto w-full pt-6">
+    <span className="block w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+      Choose Monthly
+    </span>
+  </button>
+</div>
 
-              <div className="my-6 border-t border-slate-100" />
 
-              <ul className="space-y-3 text-sm text-slate-600">
-                <li>✓ Access to live signals</li>
-                <li>✓ Real-time market updates</li>
-                <li>✓ Signal history</li>
-                <li>✓ Trade tracking</li>
-              </ul>
+{/* Yearly */}
+<div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+  <p className="text-sm font-semibold text-slate-500">
+    Yearly
+  </p>
 
-              <button className="mt-6 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-                Choose Yearly
-              </button>
-            </div>
+  <div className="mt-3">
+    <span className="text-3xl font-bold tracking-tight text-slate-900">
+      $600
+    </span>
+
+    <span className="text-sm text-slate-500">
+      {" "} / year
+    </span>
+  </div>
+
+  <div className="my-6 border-t border-slate-100" />
+
+  <ul className="space-y-3 text-sm text-slate-600">
+    <li>✓ Access to live signals</li>
+    <li>✓ Real-time market updates</li>
+    <li>✓ Signal history</li>
+    <li>✓ Trade tracking</li>
+  </ul>
+
+  <button className="mt-auto w-full pt-6">
+    <span className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+      Choose Yearly
+    </span>
+  </button>
+</div>
 
           </div>
         </section>

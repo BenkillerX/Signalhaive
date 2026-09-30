@@ -25,6 +25,7 @@ import Settings from "./pages/user/Settings"
 import HelpAndSupport from "./pages/user/HelpAndSupport"
 import ScrollToTop from "./ScrollToTop"
 import Users from "./pages/admin/Users"
+import AdminNotifications from "./pages/admin/AdminNotifications"
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route element={<AdminLayouts />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/add-signal" element={<AddSignal />} />
+          <Route path="/add-notifications" element={<AdminNotifications />} />
           <Route path="/admin-users" element={<Users />} />
           <Route path="/admin-transactions" element={<UserComingSoon />} />
           <Route path="/admin-settings" element={<UserComingSoon />} />

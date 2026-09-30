@@ -1,248 +1,303 @@
 import {
   Bell,
-  CheckCheck,
   CircleDollarSign,
   Info,
   TrendingUp,
-  XCircle,
+  Loader2,
 } from "lucide-react";
-import { registerPushNotifications } from "../../services/pushNotifications";
+import {  useEffect, useState } from "react";
 import api from "../../services/api";
 
+type NotificationType = "announcement" | "market" | "system";
+
+interface Notification {
+  _id: string;
+  title: string;
+  message: string;
+  type: NotificationType;
+  url?: string;
+  createdAt: string;
+  isRead: boolean;
+}
 
 const Notifications = () => {
- const handleEnableNotifications = async () => {
+  const [notifications, setNotifications] = useState<
+    Notification[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  let isMounted = true;
+
+  const fetchNotifications = async () => {
     try {
-      const subscription = await registerPushNotifications();
+      const response = await api.get("/api/notifications");
 
-      console.log("Push subscription:", subscription);
-
-      await api.post("/api/notifications/subscribe", {
-        subscription,
-      });
-
-      console.log("Subscription saved on backend");
+      if (isMounted) {
+        setNotifications(
+          response.data.notifications ?? []
+        );
+      }
     } catch (error) {
-      console.error("Push notification setup failed:", error);
+      console.error(
+        "Failed to fetch notifications:",
+        error
+      );
+    } finally {
+      if (isMounted) {
+        setLoading(false);
+      }
     }
   };
+
+  fetchNotifications();
+
+  return () => {
+    isMounted = false;
+  };
+}, []);
+  const markAsRead = async (notificationId: string) => {
+    try {
+      await api.patch(
+        `/api/notifications/${notificationId}/read`
+      );
+
+      setNotifications((previousNotifications) =>
+        previousNotifications.map((notification) =>
+          notification._id === notificationId
+            ? { ...notification, isRead: true }
+            : notification
+        )
+      );
+    } catch (error) {
+      console.error(
+        "Failed to mark notification as read:",
+        error
+      );
+    }
+  };
+
+  const getNotificationIcon = (
+    type: NotificationType
+  ) => {
+    switch (type) {
+      case "market":
+        return <TrendingUp size={19} />;
+
+      case "system":
+        return <CircleDollarSign size={19} />;
+
+      case "announcement":
+      default:
+        return <Info size={19} />;
+    }
+  };
+
+  const getNotificationStyles = (
+    type: NotificationType
+  ) => {
+    switch (type) {
+      case "market":
+        return "bg-emerald-50 text-emerald-600";
+
+      case "system":
+        return "bg-purple-50 text-purple-600";
+
+      case "announcement":
+      default:
+        return "bg-blue-50 text-blue-600";
+    }
+  };
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleString("en-NG", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+  };
+
+  const unreadCount = notifications.filter(
+    (notification) => !notification.isRead
+  ).length;
+
+  const todayCount = notifications.filter(
+    (notification) => {
+      const today = new Date();
+      const notificationDate = new Date(
+        notification.createdAt
+      );
+
+      return (
+        today.toDateString() ===
+        notificationDate.toDateString()
+      );
+    }
+  ).length;
 
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-<button onClick={handleEnableNotifications}>
-  Enable Notifications
-</button>
         {/* Header */}
-        <div className="mb-8 flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-slate-700 shadow-sm ring-1 ring-slate-200">
-                <Bell size={20} />
-              </div>
+        <div className="mb-8">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-slate-700 shadow-sm ring-1 ring-slate-200">
+              <Bell size={20} />
+            </div>
 
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-                  Notifications
-                </h1>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+                Notifications
+              </h1>
 
-                <p className="mt-1 text-sm text-slate-500">
-                  Stay updated with your SignalHive activity.
-                </p>
-              </div>
+              <p className="mt-1 text-sm text-slate-500">
+                Stay updated with your SignalHive activity.
+              </p>
             </div>
           </div>
-
-          <button className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-white hover:text-slate-900">
-            <CheckCheck size={15} />
-            Mark all as read
-          </button>
         </div>
 
-        {/* Notification Summary */}
+        {/* Summary */}
         <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-
+          {/* All */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
             <p className="text-xs font-medium text-slate-500">
               All notifications
             </p>
 
             <p className="mt-1 text-xl font-bold text-slate-900">
-              8
+              {notifications.length}
             </p>
           </div>
 
+          {/* Unread */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
             <p className="text-xs font-medium text-slate-500">
               Unread
             </p>
 
             <p className="mt-1 text-xl font-bold text-slate-900">
-              3
+              {unreadCount}
             </p>
           </div>
 
+          {/* Today */}
           <div className="hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:block">
             <p className="text-xs font-medium text-slate-500">
               Today
             </p>
 
             <p className="mt-1 text-xl font-bold text-slate-900">
-              4
+              {todayCount}
             </p>
           </div>
-
         </div>
 
         {/* Notifications */}
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-
-          {/* New notification */}
-          <div className="border-b border-slate-100 bg-slate-50/70 p-4 transition hover:bg-slate-50 md:p-5">
-            <div className="flex gap-4">
-
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <TrendingUp size={19} />
+          {/* Loading */}
+          {loading ? (
+            <div className="flex min-h-62.5 items-center justify-center">
+              <Loader2
+                size={28}
+                className="animate-spin text-blue-500"
+              />
+            </div>
+          ) : notifications.length === 0 ? (
+            /* Empty */
+            <div className="flex min-h-62.5 flex-col items-center justify-center px-6 text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400">
+                <Bell size={22} />
               </div>
 
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      New EUR/USD signal
-                    </h3>
+              <h3 className="mt-4 text-sm font-semibold text-slate-900">
+                No notifications yet
+              </h3>
 
-                    <p className="mt-1 text-sm leading-5 text-slate-500">
-                      A new BUY signal has been posted for EUR/USD.
-                    </p>
+              <p className="mt-1 text-sm text-slate-500">
+                You're all caught up.
+              </p>
+            </div>
+          ) : (
+            /* Notification List */
+            <div>
+              {notifications.map((notification, index) => (
+                <button
+                  type="button"
+                  key={notification._id}
+                  onClick={() => {
+                    if (!notification.isRead) {
+                      markAsRead(notification._id);
+                    }
+                  }}
+                  className={`block w-full text-left transition ${
+                    notification.isRead
+                      ? "bg-white hover:bg-slate-50"
+                      : "bg-blue-50/40 hover:bg-blue-50"
+                  } ${
+                    index !== notifications.length - 1
+                      ? "border-b border-slate-100"
+                      : ""
+                  }`}
+                >
+                  <div className="p-4 md:p-5">
+                    <div className="flex gap-4">
+                      {/* Icon */}
+                      <div
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${getNotificationStyles(
+                          notification.type
+                        )}`}
+                      >
+                        {getNotificationIcon(
+                          notification.type
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <h3
+                                className={`text-sm ${
+                                  notification.isRead
+                                    ? "font-semibold text-slate-900"
+                                    : "font-bold text-slate-900"
+                                }`}
+                              >
+                                {notification.title}
+                              </h3>
+
+                              {!notification.isRead && (
+                                <span className="shrink-0 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                                  Unread
+                                </span>
+                              )}
+                            </div>
+
+                            <p className="mt-1 text-sm leading-5 text-slate-500">
+                              {notification.message}
+                            </p>
+                          </div>
+
+                          {/* Unread dot */}
+                          {!notification.isRead && (
+                            <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-600" />
+                          )}
+                        </div>
+
+                        <p className="mt-2 text-xs text-slate-400">
+                          {formatDate(
+                            notification.createdAt
+                          )}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-                </div>
-
-                <p className="mt-2 text-xs text-slate-400">
-                  5 minutes ago
-                </p>
-              </div>
-
+                </button>
+              ))}
             </div>
-          </div>
-
-          {/* New notification */}
-          <div className="border-b border-slate-100 bg-slate-50/70 p-4 transition hover:bg-slate-50 md:p-5">
-            <div className="flex gap-4">
-
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <TrendingUp size={19} />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      XAU/USD signal updated
-                    </h3>
-
-                    <p className="mt-1 text-sm leading-5 text-slate-500">
-                      The take profit level for the XAU/USD signal has been updated.
-                    </p>
-                  </div>
-
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-                </div>
-
-                <p className="mt-2 text-xs text-slate-400">
-                  18 minutes ago
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Read notification */}
-          <div className="border-b border-slate-100 p-4 transition hover:bg-slate-50 md:p-5">
-            <div className="flex gap-4">
-
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-                <CircleDollarSign size={19} />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <h3 className="text-sm font-semibold text-slate-900">
-                  Subscription payment successful
-                </h3>
-
-                <p className="mt-1 text-sm leading-5 text-slate-500">
-                  Your monthly SignalHive subscription has been renewed successfully.
-                </p>
-
-                <p className="mt-2 text-xs text-slate-400">
-                  2 hours ago
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Read notification */}
-          <div className="border-b border-slate-100 p-4 transition hover:bg-slate-50 md:p-5">
-            <div className="flex gap-4">
-
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-                <Info size={19} />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <h3 className="text-sm font-semibold text-slate-900">
-                  Market update
-                </h3>
-
-                <p className="mt-1 text-sm leading-5 text-slate-500">
-                  The market is experiencing increased volatility. Trade carefully.
-                </p>
-
-                <p className="mt-2 text-xs text-slate-400">
-                  Yesterday
-                </p>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Read notification */}
-          <div className="p-4 transition hover:bg-slate-50 md:p-5">
-            <div className="flex gap-4">
-
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-500">
-                <XCircle size={19} />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <h3 className="text-sm font-semibold text-slate-900">
-                  Signal closed
-                </h3>
-
-                <p className="mt-1 text-sm leading-5 text-slate-500">
-                  The GBP/USD signal has been closed.
-                </p>
-
-                <p className="mt-2 text-xs text-slate-400">
-                  Yesterday
-                </p>
-              </div>
-
-            </div>
-          </div>
-
+          )}
         </div>
-
-        {/* Empty / Load more area */}
-        <div className="mt-6 flex justify-center">
-          <button className="rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-xs font-semibold text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-slate-900">
-            Load more
-          </button>
-        </div>
-
       </div>
     </div>
   );

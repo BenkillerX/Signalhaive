@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChartCandlestick,
   Signal,
@@ -13,7 +13,18 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import api from "../../services/api";
 import signalHiveLogo from "/images/plainLogo2.jpeg";
+import LogoutConfirmationModal from "../LogoutConfirmationModal";
+
+interface Notification {
+  _id: string;
+  title: string;
+  message: string;
+  type: "announcement" | "market" | "system";
+  createdAt: string;
+}
+
 const BottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,7 +32,18 @@ const BottomNav = () => {
   const { currentUser, logout } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const handleLogoutClick = () => {
+  setIsLogoutModalOpen(true);
+};
 
+const confirmLogout = () => {
+  logout();
+  setIsLogoutModalOpen(false);
+  setIsMenuOpen(false);
+  navigate("/login");
+};
   const mainNavigation = [
     {
       label: "Signals",
@@ -45,40 +67,54 @@ const BottomNav = () => {
     },
   ];
 
-const moreNavigation = [
-  {
-    label: "Mentorship",
-    icon: GraduationCap,
-    path: "/mentorship",
-  },
-  {
-    label: "Notifications",
-    icon: Bell,
-    path: "/notifications",
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    path: "/settings",
-  },
-  {
-    label: "Help & Support",
-    icon: CircleHelp,
-    path: "/help-support",
-  }
-];
+  const moreNavigation = [
+    {
+      label: "Mentorship",
+      icon: GraduationCap,
+      path: "/mentorship",
+    },
+    {
+      label: "Notifications",
+      icon: Bell,
+      path: "/notifications",
+    },
+    {
+      label: "Settings",
+      icon: Settings,
+      path: "/settings",
+    },
+    {
+      label: "Help & Support",
+      icon: CircleHelp,
+      path: "/help-support",
+    },
+  ];
+
+  // Fetch notification count
+  useEffect(() => {
+    const fetchNotificationCount = async () => {
+      try {
+        const response = await api.get("/api/notifications");
+
+        const notifications: Notification[] =
+          response.data.notifications ?? [];
+
+        setNotificationCount(notifications.length);
+      } catch (error) {
+        console.error(
+          "Failed to fetch notification count:",
+          error
+        );
+      }
+    };
+
+    fetchNotificationCount();
+  }, []);
 
   const handleNavigation = (path: string) => {
     navigate(path);
     setIsMenuOpen(false);
   };
-
-  const handleLogout = () => {
-    logout();
-    setIsMenuOpen(false);
-    navigate("/login");
-  };
-
   const getInitials = () => {
     if (!currentUser) return "U";
 
@@ -97,11 +133,16 @@ const moreNavigation = [
 
   return (
     <>
+     <LogoutConfirmationModal
+      isOpen={isLogoutModalOpen}
+      onCancel={() => setIsLogoutModalOpen(false)}
+      onConfirm={confirmLogout}
+    />
       {/* =========================
           MOBILE MORE MENU
       ========================== */}
       {isMenuOpen && (
-  <div className="fixed inset-0 z-60 lg:hidden">
+        <div className="fixed inset-0 z-60 lg:hidden">
           {/* Backdrop */}
           <button
             aria-label="Close menu"
@@ -112,34 +153,34 @@ const moreNavigation = [
           {/* Bottom Sheet */}
           <div className="absolute bottom-0 left-0 w-full rounded-t-3xl bg-white p-5 shadow-2xl">
             {/* Header */}
-           {/* Header */}
-<div className="mb-5 flex items-center justify-between">
-  <div className="flex items-center gap-3">
-    <img
-      src={signalHiveLogo}
-      alt="SignalHive"
-      className="h-9 w-9 object-contain"
-    />
+            <div className="mb-5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <img
+                  src={signalHiveLogo}
+                  alt="SignalHive"
+                  className="h-9 w-9 object-contain"
+                />
 
-    <div>
-      <h2 className="text-lg font-semibold text-slate-900">
-        SignalHive
-      </h2>
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-900">
+                    SignalHive
+                  </h2>
 
-      <p className="text-sm text-slate-500">
-        Account and additional options
-      </p>
-    </div>
-  </div>
+                  <p className="text-sm text-slate-500">
+                    Account and additional options
+                  </p>
+                </div>
+              </div>
 
-  <button
-    onClick={() => setIsMenuOpen(false)}
-    className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
-    aria-label="Close menu"
-  >
-    <X size={20} />
-  </button>
-</div>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
+                aria-label="Close menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
             {/* =========================
                 CURRENT USER
             ========================== */}
@@ -181,20 +222,37 @@ const moreNavigation = [
                 const isActive =
                   location.pathname === item.path;
 
+                const isNotifications =
+                  item.path === "/notifications";
+
                 return (
                   <button
                     key={item.label}
-                    onClick={() => handleNavigation(item.path)}
+                    onClick={() =>
+                      handleNavigation(item.path)
+                    }
                     className={`flex items-center gap-3 rounded-xl p-3 text-left transition ${
                       isActive
                         ? "bg-slate-900 text-white"
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
-                    <Icon
-                      size={19}
-                      strokeWidth={isActive ? 2.2 : 1.8}
-                    />
+                    {/* Icon + Notification Badge */}
+                    <div className="relative">
+                      <Icon
+                        size={19}
+                        strokeWidth={isActive ? 2.2 : 1.8}
+                      />
+
+                      {isNotifications &&
+                        notificationCount > 0 && (
+                          <span className="absolute -right-2.5 -top-2 flex min-w-4.25 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold leading-4.25 text-white">
+                            {notificationCount > 99
+                              ? "99+"
+                              : notificationCount}
+                          </span>
+                        )}
+                    </div>
 
                     <span className="text-sm font-medium">
                       {item.label}
@@ -208,14 +266,13 @@ const moreNavigation = [
             <div className="my-4 border-t border-slate-200" />
 
             {/* Logout */}
-            <button
-              onClick={handleLogout}
-              className="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
-            >
-              <LogOut size={19} strokeWidth={1.8} />
-
-              <span>Logout</span>
-            </button>
+           <button
+  onClick={handleLogoutClick}
+  className="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+>
+  <LogOut size={19} strokeWidth={1.8} />
+  <span>Logout</span>
+</button>
           </div>
         </div>
       )}
