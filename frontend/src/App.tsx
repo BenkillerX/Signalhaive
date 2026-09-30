@@ -26,6 +26,7 @@ import HelpAndSupport from "./pages/user/HelpAndSupport"
 import ScrollToTop from "./ScrollToTop"
 import Users from "./pages/admin/Users"
 import AdminNotifications from "./pages/admin/AdminNotifications"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   return (
@@ -42,7 +43,8 @@ function App() {
         </Route>
 
         {/* User Routes */}
-        <Route element={<UsersLayout />}>
+        <Route element={<ProtectedRoute/>}>
+          <Route element={<UsersLayout />}>
           <Route path="/markets" element={<Market />} />
           <Route path="/live-signals" element={<LiveSignals />} />
           <Route path="/portfolio" element={<UserComingSoon />} />
@@ -52,6 +54,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help-support" element={<HelpAndSupport />} />
+        </Route>
         </Route>
 
         {/* Admin Routes */}
@@ -69,10 +72,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route
-  path="/reset-password"
-  element={<ResetPassword />}
-/>
+        <Route path="/reset-password"element={<ResetPassword />}/>
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
     </>
