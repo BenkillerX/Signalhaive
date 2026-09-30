@@ -10,7 +10,7 @@ const Wallet = () => {
           </h1>
 
           <p className="mt-1 text-sm text-slate-500">
-            Manage your SignalHive subscription and payments.
+            Manage your SignalHaive subscription and payments.
           </p>
         </div>
 
@@ -22,7 +22,7 @@ const Wallet = () => {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500">
-              Your current SignalHive plan.
+              Your current SignalHaive plan.
             </p>
           </div>
 
@@ -100,7 +100,7 @@ const Wallet = () => {
   </div>
 
   <p className="mt-2 text-xs text-slate-400">
-    Short-term access to SignalHive
+    Short-term access to SignalHaive
   </p>
 
   <div className="my-6 border-t border-slate-100" />

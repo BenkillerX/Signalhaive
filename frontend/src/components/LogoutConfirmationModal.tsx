@@ -46,7 +46,7 @@ const LogoutConfirmationModal = ({
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-slate-500">
-          Are you sure you want to log out of your SignalHive account?
+          Are you sure you want to log out of your SignalHaive account?
         </p>
 
         {/* Actions */}

@@ -55,7 +55,7 @@ const handleSubmit = async (
 
             <p className="mt-2 text-sm leading-6 text-slate-400">
               Enter the email address associated with your
-              SignalHive account and we'll send you a password
+              SignalHaive account and we'll send you a password
               reset link.
             </p>
           </div>
@@ -118,7 +118,7 @@ const handleSubmit = async (
           </div>
 
           <p className="mt-6 text-center text-xs text-slate-600">
-            © {new Date().getFullYear()} SignalHive. All rights reserved.
+            © {new Date().getFullYear()} SignalHaive. All rights reserved.
           </p>
         </div>
       </div>

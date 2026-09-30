@@ -50,7 +50,7 @@ const Register = () => {
             </div>
 
             <h1 className="text-2xl font-bold tracking-tight">
-              Create your SignalHive account
+              Create your SignalHaive account
             </h1>
 
             <p className="mt-2 text-sm text-slate-400">
@@ -166,7 +166,7 @@ const Register = () => {
                   htmlFor="terms"
                   className="text-xs leading-5 text-slate-400"
                 >
-                  I agree to the SignalHive{" "}
+                  I agree to the SignalHaive{" "}
                   <Link
                     to="/terms"
                     className="text-slate-200 underline underline-offset-2 hover:text-white"
@@ -216,7 +216,7 @@ const Register = () => {
           </div>
 
           <p className="mt-6 text-center text-xs text-slate-600">
-            © {new Date().getFullYear()} SignalHive. All rights reserved.
+            © {new Date().getFullYear()} SignalHaive. All rights reserved.
           </p>
         </div>
       </div>

@@ -73,7 +73,7 @@ const AdminSidebar = () => {
       <aside className="fixed left-0 top-0 z-50 hidden h-screen w-64 border-r border-zinc-800 bg-zinc-950 text-white lg:flex lg:flex-col">
         {/* Logo */}
         <div className="flex h-20 items-center justify-center border-b border-zinc-800">
-          <h1 className="text-xl font-bold">SignalHive</h1>
+          <h1 className="text-xl font-bold">SignalHaive</h1>
         </div>
 
         {/* Navigation */}
@@ -108,7 +108,7 @@ const AdminSidebar = () => {
             </p>
 
             <p className="mt-1 text-xs text-zinc-500">
-              SignalHive Admin
+              SignalHaive Admin
             </p>
 
             <button

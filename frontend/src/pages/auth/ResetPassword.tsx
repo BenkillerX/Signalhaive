@@ -84,7 +84,7 @@ const ResetPassword = () => {
             </h1>
 
             <p className="mt-2 text-sm leading-6 text-slate-400">
-              Enter a new password for your SignalHive account.
+              Enter a new password for your SignalHaive account.
             </p>
           </div>
 
@@ -220,7 +220,7 @@ const ResetPassword = () => {
           </div>
 
           <p className="mt-6 text-center text-xs text-slate-600">
-            © {new Date().getFullYear()} SignalHive. All rights reserved.
+            © {new Date().getFullYear()} SignalHaive. All rights reserved.
           </p>
         </div>
       </div>

@@ -135,7 +135,7 @@ const AddSignal = () => {
           </h1>
 
           <p className="mt-2 text-sm text-slate-400">
-            Publish and manage trading signals for SignalHive users.
+            Publish and manage trading signals for SignalHaive users.
           </p>
         </div>
 

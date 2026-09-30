@@ -295,7 +295,7 @@ const handleEditProfile = () => {
     </h2>
 
     <p className="mt-1 text-sm text-slate-500">
-      Choose how SignalHive keeps you updated.
+      Choose how SignalHaive keeps you updated.
     </p>
   </div>
 
@@ -308,7 +308,7 @@ const handleEditProfile = () => {
         </h3>
 
         <p className="mt-1 text-sm text-slate-500">
-          Allow SignalHive to send notifications to your browser.
+          Allow SignalHaive to send notifications to your browser.
         </p>
       </div>
 
@@ -376,7 +376,7 @@ const handleEditProfile = () => {
               Subscription
             </h2>
             <p className="mt-1 text-sm text-slate-500">
-              Manage your SignalHive subscription.
+              Manage your SignalHaive subscription.
             </p>
           </div>
 
@@ -393,7 +393,7 @@ const handleEditProfile = () => {
               </div>
 
               <p className="mt-2 text-sm text-slate-500">
-                Your premium subscription gives you access to SignalHive features.
+                Your premium subscription gives you access to SignalHaive features.
               </p>
             </div>
 
@@ -413,7 +413,7 @@ const handleEditProfile = () => {
               Danger Zone
             </h2>
             <p className="mt-1 text-sm text-slate-500">
-              Actions here can affect your SignalHive account.
+              Actions here can affect your SignalHaive account.
             </p>
           </div>
 

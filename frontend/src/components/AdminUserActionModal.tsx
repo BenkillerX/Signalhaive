@@ -64,7 +64,7 @@ const AdminUserActionModal = ({
             <>
               Are you sure you want to ban{" "}
               <span className="font-medium text-white">{userName}</span>?
-              They will no longer be able to use SignalHive.
+              They will no longer be able to use SignalHaive.
             </>
           ) : (
             <>

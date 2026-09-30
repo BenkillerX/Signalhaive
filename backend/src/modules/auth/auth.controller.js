@@ -101,7 +101,7 @@ export async function Login(req, res) {
         // Don't allow banned users to log in
         if (user.isBanned) {
             return res.status(403).json({
-                message: "You were banned from SignalHive.",
+                message: "You were banned from SignalHaive.",
             });
         }
 

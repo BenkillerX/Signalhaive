@@ -5,7 +5,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { useState } from "react";
-import signalHiveLogo from '/images/SignalHive.jpeg'
+import SignalHaiveLogo from '/images/SignalHaive.jpeg'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +32,7 @@ const Navbar = () => {
         className="flex items-center gap-2"
       >
         <img
-          src={signalHiveLogo}
+          src={SignalHaiveLogo}
           alt=""
           className="h-7 w-7 object-contain"
         />
@@ -65,7 +65,7 @@ const Navbar = () => {
           className="flex items-center gap-2"
         >
           <img
-            src={signalHiveLogo}
+            src={SignalHaiveLogo}
             alt=""
             className="h-7 w-7 object-contain"
           />
@@ -145,13 +145,13 @@ const Navbar = () => {
   className="flex items-center gap-2"
       >
         <img
-          src={signalHiveLogo}
+          src={SignalHaiveLogo}
           alt=""
           className="h-7 w-7 object-contain"
         />
 
         <h1 className="text-xl font-bold">
-          SignalHive
+          SignalHaive
         </h1>
       </Link>
           {/* Navigation */}

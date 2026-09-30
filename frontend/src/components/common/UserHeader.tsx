@@ -125,7 +125,7 @@ const UserHeader = () => {
               </p>
 
               <p className="text-[11px] text-slate-400">
-                SignalHive User
+                SignalHaive User
               </p>
             </div>
 

@@ -133,7 +133,7 @@ const Users = () => {
             </h1>
 
             <p className="mt-2 text-sm text-slate-400">
-              Manage SignalHive users and account access.
+              Manage SignalHaive users and account access.
             </p>
           </div>
 

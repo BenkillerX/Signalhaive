@@ -7,7 +7,7 @@ const brevo = new BrevoClient({
 export const sendVerificationEmail = async (email, code) => {
   const response = await brevo.transactionalEmails.sendTransacEmail({
     sender: {
-      name: "SignalHive",
+      name: "SignalHaive",
       email: process.env.BREVO_SENDER_EMAIL,
     },
 
@@ -17,9 +17,9 @@ export const sendVerificationEmail = async (email, code) => {
       },
     ],
 
-    subject: "Verify your SignalHive email",
+    subject: "Verify your SignalHaive email",
 
-    textContent: `Your SignalHive verification code is ${code}. This code expires in 10 minutes.`,
+    textContent: `Your SignalHaive verification code is ${code}. This code expires in 10 minutes.`,
 
     htmlContent: `
       <div style="
@@ -34,11 +34,11 @@ export const sendVerificationEmail = async (email, code) => {
           color: #15803d;
           margin-bottom: 24px;
         ">
-          Verify your SignalHive email
+          Verify your SignalHaive email
         </h2>
 
         <p>
-          Thank you for creating an account with SignalHive.
+          Thank you for creating an account with SignalHaive.
         </p>
 
         <p>
@@ -79,7 +79,7 @@ export const sendVerificationEmail = async (email, code) => {
           color: #9ca3af;
           font-size: 12px;
         ">
-          © ${new Date().getFullYear()} SignalHive
+          © ${new Date().getFullYear()} SignalHaive
         </p>
 
       </div>
@@ -95,7 +95,7 @@ export const sendPasswordResetEmail = async (email, resetUrl) => {
   const response =
     await brevo.transactionalEmails.sendTransacEmail({
       sender: {
-        name: "SignalHive",
+        name: "SignalHaive",
         email: process.env.BREVO_SENDER_EMAIL,
       },
 
@@ -105,9 +105,9 @@ export const sendPasswordResetEmail = async (email, resetUrl) => {
         },
       ],
 
-      subject: "Reset your SignalHive password",
+      subject: "Reset your SignalHaive password",
 
-      textContent: `We received a request to reset your SignalHive password.
+      textContent: `We received a request to reset your SignalHaive password.
 
 Click this link to reset your password:
 ${resetUrl}
@@ -129,11 +129,11 @@ If you did not request a password reset, you can safely ignore this email.`,
             color: #15803d;
             margin-bottom: 24px;
           ">
-            Reset your SignalHive password
+            Reset your SignalHaive password
           </h2>
 
           <p>
-            We received a request to reset your SignalHive password.
+            We received a request to reset your SignalHaive password.
           </p>
 
           <p>
@@ -175,7 +175,7 @@ If you did not request a password reset, you can safely ignore this email.`,
             color: #9ca3af;
             font-size: 12px;
           ">
-            © ${new Date().getFullYear()} SignalHive
+            © ${new Date().getFullYear()} SignalHaive
           </p>
 
         </div>

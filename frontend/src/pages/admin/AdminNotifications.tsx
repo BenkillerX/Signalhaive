@@ -147,7 +147,7 @@ const AdminNotifications = () => {
           </h1>
 
           <p className="mt-2 text-sm text-slate-400">
-            Send announcements and updates to SignalHive users.
+            Send announcements and updates to SignalHaive users.
           </p>
         </div>
 

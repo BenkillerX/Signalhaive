@@ -150,7 +150,7 @@ useEffect(() => {
               </h1>
 
               <p className="mt-1 text-sm text-slate-500">
-                Stay updated with your SignalHive activity.
+                Stay updated with your SignalHaive activity.
               </p>
             </div>
           </div>

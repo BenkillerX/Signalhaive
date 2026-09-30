@@ -14,7 +14,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import api from "../../services/api";
-import signalHiveLogo from "/images/plainLogo2.jpeg";
+import SignalHaiveLogo from "/images/plainLogo2.jpeg";
 import LogoutConfirmationModal from "../LogoutConfirmationModal";
 
 interface Notification {
@@ -156,14 +156,14 @@ const confirmLogout = () => {
             <div className="mb-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
-                  src={signalHiveLogo}
-                  alt="SignalHive"
+                  src={SignalHaiveLogo}
+                  alt="SignalHaive"
                   className="h-9 w-9 object-contain"
                 />
 
                 <div>
                   <h2 className="text-lg font-semibold text-slate-900">
-                    SignalHive
+                    SignalHaive
                   </h2>
 
                   <p className="text-sm text-slate-500">

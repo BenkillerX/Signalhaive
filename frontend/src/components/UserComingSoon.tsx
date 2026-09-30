@@ -13,7 +13,7 @@ const UserComingSoon = () => {
         </h1>
 
         <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-500">
-          We're still working on this part of SignalHive. It will be available
+          We're still working on this part of SignalHaive. It will be available
           soon.
         </p>
 

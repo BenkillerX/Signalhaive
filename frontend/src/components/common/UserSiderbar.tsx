@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import api from "../../services/api";
-import signalHiveLogo from "/images/plainLogo2.jpeg";
+import SignalHaiveLogo from "/images/plainLogo2.jpeg";
 import LogoutConfirmationModal from "../LogoutConfirmationModal";
 
 interface Notification {
@@ -129,13 +129,13 @@ const UserSidebar = () => {
         <div className="flex h-20 items-center border-b border-slate-200 px-6">
           <div className="flex items-center gap-3">
             <img
-              src={signalHiveLogo}
-              alt="SignalHive"
+              src={SignalHaiveLogo}
+              alt="SignalHaive"
               className="h-9 w-9 object-contain"
             />
 
             <h1 className="text-xl font-bold text-slate-900">
-              SignalHive
+              SignalHaive
             </h1>
           </div>
         </div>

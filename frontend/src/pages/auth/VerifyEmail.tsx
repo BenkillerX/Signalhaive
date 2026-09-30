@@ -114,7 +114,7 @@ async function handleVerify(e: React.FormEvent<HTMLFormElement>) {
           </div>
 
           <p className="mt-6 text-center text-xs text-slate-600">
-            © {new Date().getFullYear()} SignalHive. All rights reserved.
+            © {new Date().getFullYear()} SignalHaive. All rights reserved.
           </p>
         </div>
       </div>

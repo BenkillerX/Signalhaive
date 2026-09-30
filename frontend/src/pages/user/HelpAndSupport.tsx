@@ -4,7 +4,7 @@ const HelpAndSupport = () => {
   {
     title: "Getting Started",
     description:
-      "Learn how to use SignalHive and navigate your dashboard.",
+      "Learn how to use SignalHaive and navigate your dashboard.",
     icon: "→",
     path: "/help/getting-started",
   },
@@ -55,7 +55,7 @@ const HelpAndSupport = () => {
             Help & Support
           </h1>
           <p className="mt-1 text-sm text-slate-500">
-            Find answers, get help, and learn more about using SignalHive.
+            Find answers, get help, and learn more about using SignalHaive.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ const HelpAndSupport = () => {
     </h2>
 
     <p className="mt-1 text-sm text-slate-500">
-      Search our help resources or contact the SignalHive team.
+      Search our help resources or contact the SignalHaive team.
     </p>
 
     <div className="mx-auto mt-5 flex max-w-xl flex-col gap-2 sm:flex-row">
@@ -98,7 +98,7 @@ const HelpAndSupport = () => {
               Quick Help
             </h2>
             <p className="mt-1 text-sm text-slate-500">
-              Get help with common SignalHive topics.
+              Get help with common SignalHaive topics.
             </p>
           </div>
 
@@ -164,7 +164,7 @@ const HelpAndSupport = () => {
             </p>
 
             <p className="mt-2 text-sm font-semibold text-slate-900">
-              support@signalhive.com
+              support@SignalHaive.com
             </p>
 
             <p className="mt-2 text-xs text-slate-500">
@@ -190,7 +190,7 @@ const HelpAndSupport = () => {
         {/* Disclaimer */}
         <div className="rounded-xl border border-slate-200 bg-slate-100 px-5 py-4">
           <p className="text-xs leading-5 text-slate-600">
-            SignalHive provides market information and trading signals for
+            SignalHaive provides market information and trading signals for
             educational and informational purposes. Trading financial markets
             involves risk. Always make your own trading decisions and manage
             your risk carefully.

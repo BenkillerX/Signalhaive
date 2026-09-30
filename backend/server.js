@@ -28,7 +28,7 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/notifications', notificationsRouter)
 app.get("/", (req, res) => {
   res.json({
-    message: "SignalHive API is running",
+    message: "SignalHaive API is running",
   });
 });
 const server = createServer(app);
@@ -37,7 +37,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://signalhive-sooty.vercel.app",
+      "https://SignalHaive-sooty.vercel.app",
     ],
   },
 });

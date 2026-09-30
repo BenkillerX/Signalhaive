@@ -10,7 +10,7 @@ const mentorshipOptions = [
   {
     title: "Telegram Community",
     description:
-      "Join the SignalHive community and interact with other traders.",
+      "Join the SignalHaive community and interact with other traders.",
     icon: Send,
     action: "Join Community",
     href: "https://t.me/+zQRPMdiroHwxMzU0",
@@ -142,7 +142,7 @@ const Mentorship = () => {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500">
-              Get guidance and connect with the SignalHive trading community.
+              Get guidance and connect with the SignalHaive trading community.
             </p>
           </div>
 
@@ -218,7 +218,7 @@ const Mentorship = () => {
 
               <p className="mt-1 max-w-xl text-xs leading-5 text-slate-500">
                 Get mentorship, trading discussions, updates, and connect
-                with the SignalHive community.
+                with the SignalHaive community.
               </p>
             </div>
 

@@ -46,7 +46,7 @@ const Login = () => {
       {/* Left Section */}
       <div className="hidden flex-1 flex-col justify-between bg-slate-900 p-10 lg:flex">
         <div>
-          <h1 className="text-2xl font-bold text-white">SignalHive</h1>
+          <h1 className="text-2xl font-bold text-white">SignalHaive</h1>
         </div>
 
         <div className="max-w-lg">
@@ -65,7 +65,7 @@ const Login = () => {
         </div>
 
         <p className="text-sm text-slate-500">
-          © {new Date().getFullYear()} SignalHive
+          © {new Date().getFullYear()} SignalHaive
         </p>
       </div>
 
@@ -75,7 +75,7 @@ const Login = () => {
           {/* Mobile Logo */}
           <div className="mb-10 lg:hidden">
             <h1 className="text-2xl font-bold text-slate-900">
-              SignalHive
+              SignalHaive
             </h1>
           </div>
 
@@ -86,7 +86,7 @@ const Login = () => {
             </h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              Sign in to your SignalHive account.
+              Sign in to your SignalHaive account.
             </p>
           </div>
 

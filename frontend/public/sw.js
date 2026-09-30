@@ -3,7 +3,7 @@ self.addEventListener("push", (event) => {
 
   const data = event.data.json();
 
-  const title = data.title || "SignalHive";
+  const title = data.title || "SignalHaive";
 
   const options = {
     body: data.body || "You have a new notification.",
