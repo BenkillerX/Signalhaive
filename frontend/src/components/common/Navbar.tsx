@@ -5,7 +5,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { useState } from "react";
-import SignalHaiveLogo from '/images/SignalHaive.jpeg'
+import SignalHaiveLogo from '/icons/icon.png'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
