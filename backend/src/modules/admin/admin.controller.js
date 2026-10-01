@@ -89,7 +89,56 @@ export const banUser = async (req, res) => {
     });
   }
 };
+export const unbanUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
 
+    const user = await USER.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (user.role === "admin") {
+      return res.status(403).json({
+        message: "Admin users cannot be unbanned",
+      });
+    }
+
+    if (!user.isBanned) {
+      return res.status(400).json({
+        message: "User is not banned",
+      });
+    }
+
+    user.isBanned = false;
+    user.bannedAt = null;
+    user.banReason = null;
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "User unbanned successfully",
+      user: {
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        isBanned: user.isBanned,
+        bannedAt: user.bannedAt,
+        banReason: user.banReason,
+      },
+    });
+  } catch (error) {
+    console.error("Unban user error:", error);
+
+    return res.status(500).json({
+      message: "Failed to unban user",
+    });
+  }
+};
 export const deleteUser = async (req, res) => {
   try {
     const { userId } = req.params;

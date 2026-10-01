@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import toast from "react-hot-toast";
-import { Ban, Trash2 } from "lucide-react";
+import { Ban, Trash2, RotateCcw } from "lucide-react";
 import AdminUserActionModal from "../../components/AdminUserActionModal";
 
 interface User {
@@ -16,7 +16,7 @@ interface User {
   banReason: string | null;
 }
 
-type ActionType = "ban" | "delete";
+type ActionType = "ban" | "unban" | "delete";
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -51,13 +51,17 @@ const Users = () => {
     setBanReason("");
   };
 
-  const closeActionModal = () => {
-    if (actionLoading) return;
+ const resetActionModal = () => {
+  setSelectedUser(null);
+  setActionType(null);
+  setBanReason("");
+};
 
-    setSelectedUser(null);
-    setActionType(null);
-    setBanReason("");
-  };
+const closeActionModal = () => {
+  if (actionLoading) return;
+
+  resetActionModal();
+};
 
   const handleConfirmAction = async () => {
     if (!selectedUser || !actionType) return;
@@ -65,10 +69,16 @@ const Users = () => {
     setActionLoading(true);
 
     try {
+      // BAN
       if (actionType === "ban") {
-        await api.patch(`/api/admin/users/${selectedUser._id}/ban`, {
-          reason: banReason.trim(),
-        });
+        const reason = banReason.trim();
+
+        await api.patch(
+          `/api/admin/users/${selectedUser._id}/ban`,
+          {
+            reason,
+          }
+        );
 
         setUsers((currentUsers) =>
           currentUsers.map((user) =>
@@ -77,7 +87,7 @@ const Users = () => {
                   ...user,
                   isBanned: true,
                   bannedAt: new Date().toISOString(),
-                  banReason: banReason.trim(),
+                  banReason: reason || null,
                 }
               : user
           )
@@ -86,8 +96,33 @@ const Users = () => {
         toast.success("User banned successfully.");
       }
 
+      // UNBAN
+      if (actionType === "unban") {
+        await api.patch(
+          `/api/admin/users/${selectedUser._id}/unban`
+        );
+
+        setUsers((currentUsers) =>
+          currentUsers.map((user) =>
+            user._id === selectedUser._id
+              ? {
+                  ...user,
+                  isBanned: false,
+                  bannedAt: null,
+                  banReason: null,
+                }
+              : user
+          )
+        );
+
+        toast.success("User unbanned successfully.");
+      }
+
+      // DELETE
       if (actionType === "delete") {
-        await api.delete(`/api/admin/users/${selectedUser._id}`);
+        await api.delete(
+          `/api/admin/users/${selectedUser._id}`
+        );
 
         setUsers((currentUsers) =>
           currentUsers.filter(
@@ -102,11 +137,13 @@ const Users = () => {
     } catch (error) {
       console.error(`Failed to ${actionType} user:`, error);
 
-      toast.error(
-        actionType === "ban"
-          ? "Failed to ban user."
-          : "Failed to delete user."
-      );
+      if (actionType === "ban") {
+        toast.error("Failed to ban user.");
+      } else if (actionType === "unban") {
+        toast.error("Failed to unban user.");
+      } else {
+        toast.error("Failed to delete user.");
+      }
     } finally {
       setActionLoading(false);
     }
@@ -192,7 +229,18 @@ const Users = () => {
                     {/* Actions */}
                     {user.role !== "admin" && (
                       <div className="flex shrink-0 items-center gap-2">
-                        {!user.isBanned && (
+                        {user.isBanned ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              openActionModal(user, "unban")
+                            }
+                            className="flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-400 transition hover:bg-emerald-500/20"
+                          >
+                            <RotateCcw size={16} />
+                            Unban
+                          </button>
+                        ) : (
                           <button
                             type="button"
                             onClick={() =>
@@ -205,6 +253,7 @@ const Users = () => {
                           </button>
                         )}
 
+                        {/* Delete */}
                         <button
                           type="button"
                           onClick={() =>

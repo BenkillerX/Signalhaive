@@ -39,6 +39,8 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
+      "https://signalhaive.com",
+      "https://www.signalhaive.com",
       "https://signalhive-sooty.vercel.app",
     ],
   },

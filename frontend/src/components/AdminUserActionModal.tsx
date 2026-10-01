@@ -1,6 +1,12 @@
-import { AlertTriangle, Ban, Trash2, X } from "lucide-react";
+import {
+  AlertTriangle,
+  Ban,
+  RotateCcw,
+  Trash2,
+  X,
+} from "lucide-react";
 
-type ActionType = "ban" | "delete";
+type ActionType = "ban" | "unban" | "delete";
 
 interface AdminUserActionModalProps {
   isOpen: boolean;
@@ -26,6 +32,7 @@ const AdminUserActionModal = ({
   if (!isOpen) return null;
 
   const isBan = action === "ban";
+  const isUnban = action === "unban";
 
   return (
     <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/70 px-4">
@@ -43,11 +50,17 @@ const AdminUserActionModal = ({
         {/* Icon */}
         <div
           className={`mb-5 flex h-12 w-12 items-center justify-center rounded-full ${
-            isBan ? "bg-orange-500/10" : "bg-red-500/10"
+            isBan
+              ? "bg-orange-500/10"
+              : isUnban
+              ? "bg-emerald-500/10"
+              : "bg-red-500/10"
           }`}
         >
           {isBan ? (
             <Ban className="text-orange-400" size={24} />
+          ) : isUnban ? (
+            <RotateCcw className="text-emerald-400" size={24} />
           ) : (
             <Trash2 className="text-red-400" size={24} />
           )}
@@ -55,7 +68,11 @@ const AdminUserActionModal = ({
 
         {/* Heading */}
         <h2 className="text-xl font-semibold text-white">
-          {isBan ? "Ban user?" : "Delete user?"}
+          {isBan
+            ? "Ban user?"
+            : isUnban
+            ? "Unban user?"
+            : "Delete user?"}
         </h2>
 
         {/* Description */}
@@ -65,6 +82,12 @@ const AdminUserActionModal = ({
               Are you sure you want to ban{" "}
               <span className="font-medium text-white">{userName}</span>?
               They will no longer be able to use SignalHaive.
+            </>
+          ) : isUnban ? (
+            <>
+              Are you sure you want to unban{" "}
+              <span className="font-medium text-white">{userName}</span>?
+              Their account access will be restored.
             </>
           ) : (
             <>
@@ -103,12 +126,20 @@ const AdminUserActionModal = ({
         <div className="mt-5 flex gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
           <AlertTriangle
             size={18}
-            className="mt-0.5 shrink-0 text-yellow-400"
+            className={`mt-0.5 shrink-0 ${
+              isBan
+                ? "text-yellow-400"
+                : isUnban
+                ? "text-emerald-400"
+                : "text-red-400"
+            }`}
           />
 
           <p className="text-xs leading-5 text-slate-400">
             {isBan
               ? "The user will remain in the database but their account will be marked as banned."
+              : isUnban
+              ? "The user's account will be restored and they will be able to access SignalHaive again."
               : "Deleting this user permanently removes their account from the database."}
           </p>
         </div>
@@ -131,6 +162,8 @@ const AdminUserActionModal = ({
             className={`rounded-xl px-4 py-2.5 text-sm font-medium text-white transition disabled:cursor-not-allowed disabled:opacity-50 ${
               isBan
                 ? "bg-orange-500 hover:bg-orange-400"
+                : isUnban
+                ? "bg-emerald-500 hover:bg-emerald-400"
                 : "bg-red-500 hover:bg-red-400"
             }`}
           >
@@ -138,6 +171,8 @@ const AdminUserActionModal = ({
               ? "Processing..."
               : isBan
               ? "Ban User"
+              : isUnban
+              ? "Unban User"
               : "Delete User"}
           </button>
         </div>
