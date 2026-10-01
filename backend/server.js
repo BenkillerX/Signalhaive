@@ -15,6 +15,7 @@ import signalRoutes from "./src/modules/signal/signal.routes.js";
 import adminRoutes from "./src/modules/admin/admin.routes.js";
 import notificationsRouter from "./src/modules/notifications/notification.routes.js";
 import { apiLimiter, authLimiter } from "./src/middleware/rateLimiter.js";
+import userRoutes from "./src/modules/user/user.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ app.use("/api/markets", marketRoutes);
 app.use("/api/signal", signalRoutes);
 app.use('/api/admin', adminRoutes)
 app.use('/api/notifications', notificationsRouter)
+app.use('/api/user', userRoutes)
 
 app.get("/", (req, res) => {
   res.json({
