@@ -33,48 +33,48 @@ function App() {
     <>
       <Toaster position="top-right" />
       <ScrollToTop/>
-      <Routes>
-        <Route path="/" element={<HomeRedirect />} />
-        {/* Public Pages Routes */}
-        <Route element={<PublicLayout />}>
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/How-it-works" element={<HowItWorks />} />
-          <Route path="/FAQ" element={<FAQ />} />
-        </Route>
+     <Routes>
+  {/* Public Pages Routes */}
+  <Route element={<PublicLayout />}>
+    <Route path="/" element={<HomeRedirect />} />
+    <Route path="/explore" element={<ExplorePage />} />
+    <Route path="/How-it-works" element={<HowItWorks />} />
+    <Route path="/FAQ" element={<FAQ />} />
+  </Route>
 
-        {/* User Routes */}
-        <Route element={<ProtectedRoute/>}>
-          <Route element={<UsersLayout />}>
-          <Route path="/markets" element={<Market />} />
-          <Route path="/live-signals" element={<LiveSignals />} />
-          <Route path="/portfolio" element={<UserComingSoon />} />
-          <Route path="/wallet" element={<Wallet />} />
-          <Route path="/trade-history" element={<UserComingSoon />} />
-          <Route path="/mentorship" element={<Mentorship />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/help-support" element={<HelpAndSupport />} />
-        </Route>
-        </Route>
+  {/* User Routes */}
+  <Route element={<ProtectedRoute />}>
+    <Route element={<UsersLayout />}>
+      <Route path="/markets" element={<Market />} />
+      <Route path="/live-signals" element={<LiveSignals />} />
+      <Route path="/portfolio" element={<UserComingSoon />} />
+      <Route path="/wallet" element={<Wallet />} />
+      <Route path="/trade-history" element={<UserComingSoon />} />
+      <Route path="/mentorship" element={<Mentorship />} />
+      <Route path="/notifications" element={<Notifications />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/help-support" element={<HelpAndSupport />} />
+    </Route>
+  </Route>
 
-        {/* Admin Routes */}
-        <Route element={<AdminLayouts />}>
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/add-signal" element={<AddSignal />} />
-          <Route path="/add-notifications" element={<AdminNotifications />} />
-          <Route path="/admin-users" element={<Users />} />
-          <Route path="/admin-transactions" element={<UserComingSoon />} />
-          <Route path="/admin-settings" element={<UserComingSoon />} />
-        </Route>
+  {/* Admin Routes */}
+  <Route element={<AdminLayouts />}>
+    <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/add-signal" element={<AddSignal />} />
+    <Route path="/add-notifications" element={<AdminNotifications />} />
+    <Route path="/admin-users" element={<Users />} />
+    <Route path="/admin-transactions" element={<UserComingSoon />} />
+    <Route path="/admin-settings" element={<UserComingSoon />} />
+  </Route>
 
-        {/* Auth Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password"element={<ResetPassword />}/>
-        <Route path="/coming-soon" element={<ComingSoon />} />
-      </Routes>
+  {/* Auth Routes */}
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/verify-email" element={<VerifyEmail />} />
+  <Route path="/forgot-password" element={<ForgotPassword />} />
+  <Route path="/reset-password" element={<ResetPassword />} />
+  <Route path="/coming-soon" element={<ComingSoon />} />
+</Routes>
     </>
   );
 }
