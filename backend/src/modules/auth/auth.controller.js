@@ -322,7 +322,9 @@ export const emailValidation = async (req, res) => {
 };
 export async function getCurrentUser(req, res) {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select(
+      "-password -passwordResetToken -passwordResetExpires"
+    );
 
     if (!user) {
       return res.status(404).json({
@@ -331,9 +333,34 @@ export async function getCurrentUser(req, res) {
     }
 
     res.json({
-      user,
+      user: {
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        role: user.role,
+
+        isEmailVerified: user.isEmailVerified,
+        onboardingCompleted: user.onboardingCompleted,
+
+        // Subscription
+        subscriptionPlan: user.subscriptionPlan,
+        subscriptionStatus: user.subscriptionStatus,
+        subscriptionStartDate: user.subscriptionStartDate,
+        subscriptionEndDate: user.subscriptionEndDate,
+
+        // Account status
+        isBanned: user.isBanned,
+        banReason: user.banReason,
+        bannedAt: user.bannedAt,
+
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
     });
   } catch (error) {
+    console.error("Get current user error:", error);
+
     res.status(500).json({
       message: "Server error",
     });

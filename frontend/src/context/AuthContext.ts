@@ -6,6 +6,15 @@ export type User = {
   lastname: string;
   email: string;
   role: "user" | "admin";
+
+  subscriptionPlan: "none" | "weekly" | "monthly" | "yearly";
+  subscriptionStatus:
+    | "inactive"
+    | "active"
+    | "expired"
+    | "cancelled";
+  subscriptionStartDate: string | null;
+  subscriptionEndDate: string | null;
 };
 export type RegisterData = {
   firstname: string;

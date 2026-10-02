@@ -1,4 +1,15 @@
+import { useAuth } from "../../hooks/useAuth";
+
 const Wallet = () => {
+  const { currentUser } = useAuth();
+   if (!currentUser) {
+    return null;
+  }
+
+   const hasSubscription =
+    currentUser.subscriptionStatus === "active" &&
+    currentUser.subscriptionPlan !== "none";
+
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -15,52 +26,79 @@ const Wallet = () => {
         </div>
 
         {/* Current Subscription */}
-        <section className="mb-8">
-          <div className="mb-4">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Current Subscription
-            </h2>
+      <section className="mb-8">
+  <div className="mb-4">
+    <h2 className="text-lg font-semibold text-slate-900">
+      Current Subscription
+    </h2>
 
-            <p className="mt-1 text-sm text-slate-500">
-              Your current SignalHaive plan.
-            </p>
+    <p className="mt-1 text-sm text-slate-500">
+      Your current SignalHaive plan.
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+    {hasSubscription ? (
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+        <div>
+          <div className="flex items-center gap-3">
+            <h3 className="text-xl font-bold capitalize text-slate-900">
+              {currentUser.subscriptionPlan} Plan
+            </h3>
+
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold capitalize text-emerald-600">
+              {currentUser.subscriptionStatus}
+            </span>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <p className="mt-2 text-sm text-slate-500">
+            Your subscription is active until{" "}
+            {currentUser.subscriptionEndDate
+              ? new Date(
+                  currentUser.subscriptionEndDate
+                ).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })
+              : "N/A"}
+            .
+          </p>
+        </div>
 
-              <div>
-                <div className="flex items-center gap-3">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Monthly Plan
-                  </h3>
+        <div className="md:text-right">
+          <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+            Current plan
+          </p>
 
-                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
-                    Active
-                  </span>
-                </div>
+          <p className="mt-1 text-2xl font-bold capitalize text-slate-900">
+            {currentUser.subscriptionPlan}
+          </p>
+        </div>
 
-                <p className="mt-2 text-sm text-slate-500">
-                  Your subscription is active until October 29, 2026.
-                </p>
-              </div>
+      </div>
+    ) : (
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
-              <div className="md:text-right">
-                <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-                  Current plan
-                </p>
+        <div>
+          <h3 className="text-xl font-bold text-slate-900">
+            No Active Subscription
+          </h3>
 
-                <p className="mt-1 text-2xl font-bold text-slate-900">
-                  $30
-                  <span className="text-sm font-normal text-slate-500">
-                    {" "} / month
-                  </span>
-                </p>
-              </div>
+          <p className="mt-1 text-sm text-slate-500">
+            You currently don't have an active SignalHaive subscription.
+          </p>
+        </div>
 
-            </div>
-          </div>
-        </section>
+        <span className="w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+          Inactive
+        </span>
+
+      </div>
+    )}
+  </div>
+</section>
 
         {/* Subscription Plans */}
         <section className="mb-8">
@@ -240,7 +278,7 @@ const Wallet = () => {
                     </td>
 
                     <td className="px-5 py-4 text-slate-600">
-                      ₦15,000
+                      $30
                     </td>
 
                     <td className="px-5 py-4">
@@ -260,7 +298,7 @@ const Wallet = () => {
                     </td>
 
                     <td className="px-5 py-4 text-slate-600">
-                      ₦15,000
+                      $30
                     </td>
 
                     <td className="px-5 py-4">
