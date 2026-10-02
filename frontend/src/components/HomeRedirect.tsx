@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { isPWA } from "../utils/isPWA";
-import LandingPage from "./landing/LandingPage";
+import LandingPage from "../pages/public/LandingPage";
 
 const HomeRedirect = () => {
   const pwa = isPWA();
