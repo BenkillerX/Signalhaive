@@ -5,10 +5,12 @@ import {
   unregisterPushNotifications,
 } from "../../services/pushNotifications";
 import { useAuth } from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Trash2 } from "lucide-react";
 import UserProfile from "./UserProfile";
+import UserPassword from "./UserPassword";
+import UserSubcription from "./UserSubcription";
 
 const Settings = () => {
   const { currentUser, refreshCurrentUser } = useAuth();
@@ -224,54 +226,7 @@ const handleSaveProfile = async () => {
 />
 
           {/* Account & Security */}
-          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="font-semibold text-slate-900">
-                Account & Security
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Manage your login and account security.
-              </p>
-            </div>
-
-            <div className="divide-y divide-slate-100">
-              <div className="flex flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-sm font-medium text-slate-900">
-                    Password
-                  </h3>
-
-                  <p className="mt-1 text-sm text-slate-500">
-                    Change your account password.
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  className="w-fit rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
-                >
-                  Change Password
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-sm font-medium text-slate-900">
-                    Email Verification
-                  </h3>
-
-                  <p className="mt-1 text-sm text-slate-500">
-                    Your email address is verified.
-                  </p>
-                </div>
-
-                <span className="w-fit rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                  Verified
-                </span>
-              </div>
-            </div>
-          </section>
+         <UserPassword/>
 
           {/* Notifications */}
           <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -322,43 +277,7 @@ const handleSaveProfile = async () => {
           </section>
 
           {/* Subscription */}
-          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-slate-200 px-6 py-5">
-              <h2 className="font-semibold text-slate-900">
-                Subscription
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Manage your SignalHaive subscription.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-5 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    Premium Plan
-                  </h3>
-
-                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                    Active
-                  </span>
-                </div>
-
-                <p className="mt-2 text-sm text-slate-500">
-                  Your premium subscription gives you access to
-                  SignalHaive features.
-                </p>
-              </div>
-
-              <Link
-                to="/wallet"
-                className="w-fit rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
-              >
-                Manage Subscription
-              </Link>
-            </div>
-          </section>
+          <UserSubcription/>
 
           {/* Danger Zone */}
           <section className="overflow-hidden rounded-2xl border border-red-200 bg-white shadow-sm">
