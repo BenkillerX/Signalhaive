@@ -30,6 +30,7 @@ type AuthContextType = {
   loading: boolean;
   error: string | null;
   logout: () => void;
+  refreshCurrentUser: () => Promise<void>;
   login: (email: string, password: string) => Promise<User>;
 };
 

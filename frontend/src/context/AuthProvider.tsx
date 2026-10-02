@@ -120,6 +120,14 @@ const login = async (email: string, password: string) => {
     setLoading(false);
   }
 };
+const refreshCurrentUser = async () => {
+  try {
+    const response = await api.get("/api/auth/me");
+    setCurrentUser(response.data.user);
+  } catch (error) {
+    console.error("Failed to refresh current user:", error);
+  }
+};
 
 const logout = () => {
   localStorage.removeItem("token");
@@ -134,6 +142,7 @@ const logout = () => {
         loading,
         error,
         login,
+        refreshCurrentUser,
         logout,
       }}
     >
