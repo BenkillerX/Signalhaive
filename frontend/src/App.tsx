@@ -27,10 +27,12 @@ import Users from "./pages/admin/Users"
 import AdminNotifications from "./pages/admin/AdminNotifications"
 import ProtectedRoute from "./components/ProtectedRoute"
 import HomeRedirect from "./components/HomeRedirect"
-
+import GetStarted from "./pages/user/GetStarted"
+import { Analytics } from "@vercel/analytics/react"
 function App() {
   return (
     <>
+    <Analytics/>
       <Toaster position="top-right" />
       <ScrollToTop/>
      <Routes>
@@ -54,6 +56,7 @@ function App() {
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/help-support" element={<HelpAndSupport />} />
+      <Route path="/help/getting-started" element={<GetStarted />} />
     </Route>
   </Route>
 

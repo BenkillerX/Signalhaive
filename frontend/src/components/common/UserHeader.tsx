@@ -1,4 +1,4 @@
-import { Bell, ChevronDown } from "lucide-react";
+import { Bell } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -128,11 +128,6 @@ const UserHeader = () => {
                 SignalHaive User
               </p>
             </div>
-
-            <ChevronDown
-              size={15}
-              className="hidden text-slate-400 sm:block"
-            />
           </button>
         </div>
       </div>
