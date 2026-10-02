@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Disallow: /dashboard
+Disallow: /markets
+Disallow: /live-signals
+Disallow: /portfolio
+Disallow: /wallet
+Disallow: /trade-history
+Disallow: /settings
+Disallow: /get-started
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /verify-email
+
+Sitemap: https://signalhaive.com/sitemap.xml
