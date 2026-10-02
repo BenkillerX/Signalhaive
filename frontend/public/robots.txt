@@ -14,4 +14,4 @@ Disallow: /login
 Disallow: /register
 Disallow: /verify-email
 
-Sitemap: https://signalhaive.com/sitemap.xml
+Sitemap: https://www.signalhaive.com/sitemap.xml
