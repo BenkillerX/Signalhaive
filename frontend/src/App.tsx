@@ -1,6 +1,5 @@
 import { Route, Routes} from "react-router-dom"
 import PublicLayout from "./layouts/PublicLayout"
-import LandingPage from "./components/landing/LandingPage"
 import ExplorePage from "./components/landing/ExplorePage"
 import HowItWorks from "./components/landing/HowItWorks"
 import FAQ from "./components/landing/FAQ"
@@ -27,6 +26,7 @@ import ScrollToTop from "./ScrollToTop"
 import Users from "./pages/admin/Users"
 import AdminNotifications from "./pages/admin/AdminNotifications"
 import ProtectedRoute from "./components/ProtectedRoute"
+import HomeRedirect from "./components/HomeRedirect"
 
 function App() {
   return (
@@ -34,9 +34,9 @@ function App() {
       <Toaster position="top-right" />
       <ScrollToTop/>
       <Routes>
+        <Route path="/" element={<HomeRedirect />} />
         {/* Public Pages Routes */}
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<LandingPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/How-it-works" element={<HowItWorks />} />
           <Route path="/FAQ" element={<FAQ />} />

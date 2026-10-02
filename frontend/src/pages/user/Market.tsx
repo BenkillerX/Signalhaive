@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { socket } from "../../services/socket";
+import MarketSkeleton from "./MarketSkeleton";
 type Market = {
   symbol: string;
   price: number;
@@ -137,69 +138,66 @@ useEffect(() => {
 
         {/* Market rows */}
         <div>
-          {markets.map((market) => (
+  {markets.length === 0 ? (
+    <MarketSkeleton />
+  ) : (
+    markets.map((market) => (
+      <button
+        key={market.symbol}
+        className="grid w-full grid-cols-2 items-center gap-5 border-b border-slate-100 px-5 py-5 text-left transition-colors last:border-b-0 hover:bg-slate-50 sm:grid-cols-4 sm:px-6"
+      >
+        {/* Market */}
+        <div>
+          <div className="flex items-center gap-3">
             <button
-              key={market.symbol}
-              className="grid w-full grid-cols-2 items-center gap-5 border-b border-slate-100 px-5 py-5 text-left transition-colors last:border-b-0 hover:bg-slate-50 sm:grid-cols-4 sm:px-6"
+              type="button"
+              className="text-lg text-slate-400 transition hover:text-slate-700"
             >
-
-              {/* Market */}
-              <div>
-                <div className="flex items-center gap-3">
-
-                  <button
-                    type="button"
-                    className="text-lg text-slate-400 transition hover:text-slate-700"
-                  >
-                    ☆
-                  </button>
-
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {market.symbol}
-                    </p>
-
-                    <p className="mt-1 text-xs text-slate-500">
-                      Forex market
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-
-
-              {/* Price */}
-              <div>
-                <p className="font-mono text-sm font-semibold text-slate-900">
-                  {market.price}
-                </p>
-
-                <p className="mt-1 text-xs text-slate-500">
-                  Live price
-                </p>
-              </div>
-
-
-              {/* Updated */}
-              <div className="hidden sm:block">
-                <p className="text-sm text-slate-600">
-                  {new Date(
-                    market.timestamp * 1000
-                  ).toLocaleTimeString()}
-                </p>
-              </div>
-
-
-              {/* Status */}
-              <div className="flex justify-end">
-                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
-                  Live
-                </span>
-              </div>
-
+              ☆
             </button>
-          ))}
+
+            <div>
+              <p className="font-semibold text-slate-900">
+                {market.symbol}
+              </p>
+
+              <p className="mt-1 text-xs text-slate-500">
+                Forex market
+              </p>
+            </div>
+          </div>
         </div>
+
+        {/* Price */}
+        <div>
+          <p className="font-mono text-sm font-semibold text-slate-900">
+            {market.price}
+          </p>
+
+          <p className="mt-1 text-xs text-slate-500">
+            Live price
+          </p>
+        </div>
+
+        {/* Updated */}
+        <div className="hidden sm:block">
+          <p className="text-sm text-slate-600">
+            {new Date(
+              market.timestamp * 1000
+            ).toLocaleTimeString()}
+          </p>
+        </div>
+
+        {/* Status */}
+        <div className="flex justify-end">
+          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+            Live
+          </span>
+        </div>
+      </button>
+    ))
+  )}
+</div>
 
       </div>
     </section>
