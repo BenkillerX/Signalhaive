@@ -8,7 +8,10 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
 
-    <!-- SEO -->
+    <!-- =========================================================
+         SEO
+    ========================================================== -->
+
     <title>SignalHaive — Forex Signals & Market Analysis</title>
 
     <meta
@@ -21,18 +24,26 @@
       content="index, follow"
     />
 
+    <!-- Canonical will be set dynamically based on the current route -->
     <link
+      id="canonical"
       rel="canonical"
       href="https://www.signalhaive.com/"
     />
 
-    <!-- PWA Manifest -->
+    <!-- =========================================================
+         PWA Manifest
+    ========================================================== -->
+
     <link
       rel="manifest"
       href="/manifest.webmanifest"
     />
 
-    <!-- Favicon -->
+    <!-- =========================================================
+         Favicon
+    ========================================================== -->
+
     <link
       rel="icon"
       href="/icons/icon.png"
@@ -45,19 +56,28 @@
       type="image/png"
     />
 
-    <!-- Theme -->
+    <!-- =========================================================
+         Theme
+    ========================================================== -->
+
     <meta
       name="theme-color"
       content="#0f172a"
     />
 
-    <!-- Mobile PWA -->
+    <!-- =========================================================
+         Mobile PWA
+    ========================================================== -->
+
     <meta
       name="mobile-web-app-capable"
       content="yes"
     />
 
-    <!-- iOS PWA -->
+    <!-- =========================================================
+         iOS PWA
+    ========================================================== -->
+
     <meta
       name="apple-mobile-web-app-capable"
       content="yes"
@@ -73,30 +93,36 @@
       content="SignalHaive"
     />
 
-    <!-- Open Graph / Social Sharing -->
+    <!-- =========================================================
+         Open Graph
+    ========================================================== -->
+
     <meta
       property="og:type"
       content="website"
     />
 
-   <meta
-    property="og:url"
-    content="https://www.signalhaive.com/"
-  />
+    <meta
+      id="og-url"
+      property="og:url"
+      content="https://www.signalhaive.com/"
+    />
 
     <meta
+      id="og-title"
       property="og:title"
       content="SignalHaive — Forex Signals & Market Analysis"
     />
 
     <meta
+      id="og-description"
       property="og:description"
       content="Real-time forex signals, live market data and trading analysis in one platform."
     />
 
     <meta
       property="og:image"
-      content="https://signalhaive.com/icons/icon.png"
+      content="https://www.signalhaive.com/icons/icon.png"
     />
 
     <meta
@@ -104,36 +130,180 @@
       content="SignalHaive"
     />
 
-    <!-- Twitter / X -->
+    <!-- =========================================================
+         Twitter / X
+    ========================================================== -->
+
     <meta
       name="twitter:card"
       content="summary_large_image"
     />
 
     <meta
+      id="twitter-title"
       name="twitter:title"
       content="SignalHaive — Forex Signals & Market Analysis"
     />
 
     <meta
+      id="twitter-description"
       name="twitter:description"
       content="Real-time forex signals, live market data and trading analysis in one platform."
     />
 
     <meta
       name="twitter:image"
-      content="https://signalhaive.com/icons/icon.png"
+      content="https://www.signalhaive.com/icons/icon.png"
     />
 
-    <!-- Organization Structured Data -->
-    <script type="application/ld+json">
+    <!-- =========================================================
+         Route-specific SEO
+    ========================================================== -->
+
+    <script>
+      (() => {
+        const baseUrl = "https://www.signalhaive.com";
+
+        const pages = {
+          "/": {
+            title: "SignalHaive — Forex Signals & Market Analysis",
+            description:
+              "SignalHaive provides real-time forex signals, live market data, trading analysis and market insights for forex traders."
+          },
+
+          "/explore": {
+            title: "Explore Forex Markets & Signals — SignalHaive",
+            description:
+              "Explore forex markets, trading signals, market data and insights on SignalHaive."
+          },
+
+          "/how-it-works": {
+            title: "How SignalHaive Works — Forex Signals & Market Analysis",
+            description:
+              "Learn how SignalHaive provides forex signals, live market data and trading analysis to help traders monitor the market."
+          },
+
+          "/faq": {
+            title: "FAQ — SignalHaive Forex Signals",
+            description:
+              "Find answers to frequently asked questions about SignalHaive, forex signals, market data, subscriptions and the platform."
+          }
+        };
+
+        const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+        const page = pages[pathname] || pages["/"];
+
+        const canonicalUrl =
+          pathname === "/"
+            ? `${baseUrl}/`
+            : `${baseUrl}${pathname}`;
+
+        /*
+         * Update document title
+         */
+        document.title = page.title;
+
+        /*
+         * Update meta description
+         */
+        const descriptionMeta = document.querySelector(
+          'meta[name="description"]'
+        );
+
+        if (descriptionMeta) {
+          descriptionMeta.setAttribute("content", page.description);
+        }
+
+        /*
+         * Update canonical
+         */
+        const canonical = document.getElementById("canonical");
+
+        if (canonical) {
+          canonical.setAttribute("href", canonicalUrl);
+        }
+
+        /*
+         * Update Open Graph
+         */
+        const ogUrl = document.getElementById("og-url");
+        const ogTitle = document.getElementById("og-title");
+        const ogDescription = document.getElementById("og-description");
+
+        if (ogUrl) {
+          ogUrl.setAttribute("content", canonicalUrl);
+        }
+
+        if (ogTitle) {
+          ogTitle.setAttribute("content", page.title);
+        }
+
+        if (ogDescription) {
+          ogDescription.setAttribute("content", page.description);
+        }
+
+        /*
+         * Update Twitter metadata
+         */
+        const twitterTitle = document.getElementById("twitter-title");
+        const twitterDescription = document.getElementById(
+          "twitter-description"
+        );
+
+        if (twitterTitle) {
+          twitterTitle.setAttribute("content", page.title);
+        }
+
+        if (twitterDescription) {
+          twitterDescription.setAttribute(
+            "content",
+            page.description
+          );
+        }
+
+        /*
+         * Route-specific structured data
+         */
+        const existingSchema = document.getElementById(
+          "signalhaive-schema"
+        );
+
+        if (existingSchema) {
+          existingSchema.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: page.title,
+            description: page.description,
+            url: canonicalUrl,
+            isPartOf: {
+              "@type": "WebSite",
+              name: "SignalHaive",
+              url: `${baseUrl}/`
+            }
+          });
+        }
+      })();
+    </script>
+
+    <!-- =========================================================
+         Structured Data
+    ========================================================== -->
+
+    <script
+      id="signalhaive-schema"
+      type="application/ld+json"
+    >
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "SignalHaive",
-        "url": "https://signalhaive.com/",
-        "logo": "https://signalhaive.com/icons/icon.png",
-        "description": "SignalHaive provides real-time forex signals, live market data, trading analysis and market insights for forex traders."
+        "@type": "WebPage",
+        "name": "SignalHaive — Forex Signals & Market Analysis",
+        "description": "SignalHaive provides real-time forex signals, live market data, trading analysis and market insights for forex traders.",
+        "url": "https://www.signalhaive.com/",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "SignalHaive",
+          "url": "https://www.signalhaive.com/"
+        }
       }
     </script>
   </head>
