@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white sm:px-10 lg:px-16 lg:py-20">
+    <section id="home" className="relative overflow-hidden bg-slate-950 px-6 py-20 text-white sm:px-10 lg:px-16 lg:py-20">
       {/* Background effects */}
       <div className="pointer-events-none absolute -right-40 top-0 h-125 w-125 rounded-full bg-slate-700/20 blur-[140px]" />
 

@@ -1,4 +1,4 @@
-import { AlertCircle } from "lucide-react";
+import { Activity, AlertCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { socket } from "../../services/socket";
@@ -86,7 +86,6 @@ const LiveSignals = () => {
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-
         {/* Page Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
@@ -135,10 +134,47 @@ const LiveSignals = () => {
         </section>
 
         {/* Latest Signals */}
-        <LatestSignals
-          signals={signals}
-          isLoading={isLoading}
-        />
+        {isLoading ? (
+          <LatestSignals
+            signals={signals}
+            isLoading={isLoading}
+          />
+        ) : signals.length === 0 ? (
+          <section>
+            <div className="mb-3">
+              <h2 className="text-base font-semibold text-slate-900">
+                Latest Signals
+              </h2>
+
+              <p className="text-xs text-slate-500">
+                Recently published trading signals
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-white px-6 py-12 text-center shadow-sm">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
+                <Activity
+                  size={22}
+                  className="text-slate-400"
+                />
+              </div>
+
+              <h3 className="mt-4 text-sm font-semibold text-slate-900">
+                No signals available currently
+              </h3>
+
+              <p className="mx-auto mt-2 max-w-sm text-xs leading-5 text-slate-500">
+                There are no trading signals available at the moment.
+                New signals will appear here when they become available.
+              </p>
+            </div>
+          </section>
+        ) : (
+          <LatestSignals
+            signals={signals}
+            isLoading={isLoading}
+          />
+        )}
 
         {/* Disclaimer */}
         <div className="mt-6 rounded-xl border border-amber-100 bg-amber-50 p-4">
@@ -155,7 +191,6 @@ const LiveSignals = () => {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );

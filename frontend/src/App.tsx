@@ -1,8 +1,5 @@
 import { Route, Routes} from "react-router-dom"
 import PublicLayout from "./layouts/PublicLayout"
-import ExplorePage from "./components/landing/ExplorePage"
-import HowItWorks from "./components/landing/HowItWorks"
-import FAQ from "./components/landing/FAQ"
 import Login from "./pages/auth/Login"
 import Register from "./pages/auth/Register"
 import VerifyEmail from "./pages/auth/VerifyEmail"
@@ -39,9 +36,6 @@ function App() {
   {/* Public Pages Routes */}
   <Route element={<PublicLayout />}>
     <Route path="/" element={<HomeRedirect />} />
-    <Route path="/explore" element={<ExplorePage />} />
-    <Route path="/How-it-works" element={<HowItWorks />} />
-    <Route path="/FAQ" element={<FAQ />} />
   </Route>
 
   {/* User Routes */}

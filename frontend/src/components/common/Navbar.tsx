@@ -10,13 +10,13 @@ import SignalHaiveLogo from "/icons/icon.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Explore", path: "/explore" },
-    { name: "How It Works", path: "/how-it-works" },
-    { name: "Live Signals", path: "/live-signals" },
-    { name: "FAQ", path: "/faq" },
-  ];
+const navLinks = [
+  { name: "Home", path: "/#home" },
+  { name: "How It Works", path: "/#how-it-works" },
+  { name: "Live Signals", path: "/#live-signals" },
+  { name: "Performance", path: "/#performance" },
+  { name: "FAQ", path: "/#faq" },
+];
 
   const closeMenu = () => {
     setIsOpen(false);
@@ -95,12 +95,12 @@ const Navbar = () => {
             <ul className="flex items-center gap-6 lg:gap-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    to={link.path}
+                  <a
+                    href={link.path}
                     className="relative py-2 text-sm font-medium text-slate-400 transition hover:text-white"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
