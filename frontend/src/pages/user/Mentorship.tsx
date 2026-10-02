@@ -21,7 +21,7 @@ const mentorshipOptions = [
       "Have a question about trading? Ask inside our community.",
     icon: MessageCircle,
     action: "Ask a Question",
-    href: "https://t.me/+zQRPMdiroHwxMzU0",
+    href: "https://chat.whatsapp.com/D6rnx1sjQl46IDhJDhTQ0w",
   },
 ];
 const Mentorship = () => {
