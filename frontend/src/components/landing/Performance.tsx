@@ -56,9 +56,6 @@ const Performance = () => {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="max-w-2xl">
-          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">
-            Performance
-          </div>
 
           <h2 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-slate-950 sm:text-4xl lg:text-5xl">
             Performance you can track.
@@ -289,12 +286,6 @@ const Performance = () => {
             </p>
           </div>
         </div>
-
-        <p className="mt-8 max-w-3xl text-xs leading-5 text-slate-400">
-          Performance figures shown above are illustrative placeholders for
-          the public interface. Historical results do not guarantee future
-          performance. Trading involves substantial risk.
-        </p>
       </div>
     </section>
   );

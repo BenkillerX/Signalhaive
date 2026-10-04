@@ -41,7 +41,7 @@ const navLinks = [
       <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-900/95 backdrop-blur-md">
         <nav className="mx-auto w-full">
           {/* ================= MOBILE NAVBAR ================= */}
-          <div className="flex h-16items-center justify-between px-4 md:hidden">
+          <div className="flex h-16 items-center justify-between px-4 md:hidden">
             <Link
               to="/"
               onClick={closeMenu}

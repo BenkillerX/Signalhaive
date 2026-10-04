@@ -6,9 +6,9 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is SignalHive?",
+      question: "What is SignalHaive?",
       answer:
-        "SignalHive is a forex signal platform that helps traders monitor market opportunities through structured trading signals, real-time updates, and historical performance tracking.",
+        "SignalHaive is a forex signal platform that helps traders monitor market opportunities through structured trading signals, real-time updates, and historical performance tracking.",
     },
     {
       question: "What information does a signal include?",
@@ -23,20 +23,20 @@ const FAQ = () => {
     {
       question: "Can I see previous signal performance?",
       answer:
-        "Yes. SignalHive is designed to record completed signals so users can review historical outcomes and understand how previous signals performed.",
+        "Yes. SignalHaive is designed to record completed signals so users can review historical outcomes and understand how previous signals performed.",
     },
     {
-      question: "Does SignalHive execute trades for me?",
+      question: "Does SignalHaive execute trades for me?",
       answer:
-        "No. SignalHive provides market information and trading signals. You remain responsible for deciding whether to enter a trade and for executing it through your chosen broker.",
+        "No. SignalHaive provides market information and trading signals. You remain responsible for deciding whether to enter a trade and for executing it through your chosen broker.",
     },
     {
-      question: "Is SignalHive suitable for beginners?",
+      question: "Is SignalHaive suitable for beginners?",
       answer:
-        "SignalHive can help simplify the information presented around a trading setup, but users should understand forex trading and its risks before making real-money trading decisions.",
+        "SignalHaive can help simplify the information presented around a trading setup, but users should understand forex trading and its risks before making real-money trading decisions.",
     },
     {
-      question: "Does SignalHive guarantee profitable trades?",
+      question: "Does SignalHaive guarantee profitable trades?",
       answer:
         "No. Past performance does not guarantee future results. Forex trading involves significant risk, and every signal can result in a loss.",
     },
@@ -101,7 +101,7 @@ const FAQ = () => {
         {/* Bottom note */}
         <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
           <p className="text-sm text-slate-500">
-            Trading involves risk. SignalHive provides market information and
+            Trading involves risk. SignalaHive provides market information and
             signals and does not guarantee trading results.
           </p>
         </div>
