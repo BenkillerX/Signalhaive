@@ -87,11 +87,11 @@ const Footer = () => {
             <h3 className="text-sm font-semibold text-white">Get in touch</h3>
 
             <a
-              href="mailto:support@signalhive.com"
+              href="mailto:signalhaive@gmail.com"
               className="mt-5 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
             >
               <Mail size={16} />
-              support@signalhive.com
+             signalhaive@gmail.com
             </a>
 
             <a
