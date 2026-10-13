@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
       {/* Total Users */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:bg-white/[0.05] sm:p-6">
+      <div className="rounded-2xl border border-white/10 bg-white/3 p-5 transition-colors hover:bg-white/5 sm:p-6">
         <p className="text-sm font-medium text-slate-400">
           Total Users
         </p>
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Active Signals */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:bg-white/[0.05] sm:p-6">
+      <div className="rounded-2xl border border-white/10 bg-white/3 p-5 transition-colors hover:bg-white/5 sm:p-6">
         <p className="text-sm font-medium text-slate-400">
           Active Signals
         </p>
@@ -78,7 +78,7 @@ const AdminDashboard = () => {
     <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
 
       {/* Recent Signals */}
-      <section className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+      <section className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/3">
         <div className="flex flex-col gap-3 border-b border-white/10 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
             <h2 className="text-base font-semibold text-white">
@@ -106,7 +106,7 @@ const AdminDashboard = () => {
       </section>
 
       {/* Recent Users */}
-      <section className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+      <section className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/3">
         <div className="flex flex-col gap-3 border-b border-white/10 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
             <h2 className="text-base font-semibold text-white">
@@ -135,7 +135,7 @@ const AdminDashboard = () => {
     </div>
 
     {/* Market Overview */}
-    <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+    <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/3">
 
       {/* Section Header */}
       <div className="border-b border-white/10 px-5 py-5 sm:px-6">
