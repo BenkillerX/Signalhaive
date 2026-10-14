@@ -44,6 +44,7 @@ const io = new Server(server, {
       "https://signalhaive.com",
       "https://www.signalhaive.com",
       "https://signalhive-sooty.vercel.app",
+      "http://localhost:8081",
     ],
   },
 });
