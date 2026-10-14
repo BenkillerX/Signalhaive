@@ -13,7 +13,7 @@ const mentorshipOptions = [
       "Join the SignalHaive community and interact with other traders.",
     icon: Send,
     action: "Join Community",
-    href: "https://t.me/+zQRPMdiroHwxMzU0",
+    href: "https://t.me/signalhaive",
   },
   {
     title: "Ask a Mentor",
