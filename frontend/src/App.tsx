@@ -46,13 +46,42 @@ const UserComingSoon = lazy(
 );
 
 // Loading fallback
+
 function PageLoader() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950">
-      <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-700 border-t-emerald-500" />
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950 px-6">
+
+      {/* Brand */}
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          Signal<span className="text-slate-400">Haive</span>
+        </h1>
+
+        <p className="mt-3 text-xs font-medium uppercase tracking-[0.25em] text-slate-500">
+          Real-Time Market Intelligence
+        </p>
+      </div>
+
+      {/* Loading Spinner */}
+      <div className="relative flex items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-800 border-t-slate-500" />
+
+        <div className="absolute h-5 w-5 rounded-full bg-emerald-500/10 blur-md" />
+      </div>
+
+      {/* Loading Text */}
+      <p className="mt-6 animate-pulse text-sm font-medium tracking-wide text-slate-400">
+        Preparing your experience...
+      </p>
+
+      {/* Footer */}
+      <p className="absolute bottom-8 text-xs text-slate-600">
+        Powered by SignalHaive
+      </p>
     </div>
   );
 }
+
 
 function App() {
   return (
