@@ -48,12 +48,32 @@ const HeroSection = () => {
               <span className="ml-2">→</span>
             </Link>
 
-            <Link
-              to="/how-it-works"
-              className="rounded-xl border border-slate-700 bg-slate-900/60 px-7 py-3.5 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-800"
-            >
-              View How It Works
-            </Link>
+            
+<Link
+  to="/#how-it-works"
+  onClick={(e) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault();
+
+      document
+        .getElementById("how-it-works")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+      window.history.replaceState(
+        null,
+        "",
+        "/#how-it-works"
+      );
+    }
+  }}
+  className="rounded-xl border border-slate-700 bg-slate-900/60 px-7 py-3.5 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-800"
+>
+  View How It Works
+</Link>
+
           </div>
 
           {/* Feature points */}
